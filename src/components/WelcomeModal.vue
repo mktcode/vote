@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref } from "vue";
 import {
   TransitionRoot,
   TransitionChild,
@@ -13,7 +13,7 @@ const isOpen = ref(true);
 
 <template>
   <TransitionRoot appear :show="isOpen" as="template">
-    <Dialog as="div" @close="(isOpen = false)" class="relative z-10">
+    <Dialog as="div" @close="isOpen = false" class="relative z-10">
       <TransitionChild
         as="template"
         enter="duration-300 ease-out"
@@ -50,27 +50,33 @@ const isOpen = ref(true);
               </DialogTitle>
               <div class="mt-2 space-y-3">
                 <p class="font-bold text-gray-700">
-                  This is a proof of concept to demonstrate a fully decentralized voting system with on-chain execution capabilities.
+                  This is a proof of concept to demonstrate a fully
+                  decentralized voting system with on-chain execution
+                  capabilities.
                 </p>
                 <p class="text-sm text-gray-500">
-                  Proposals and votes are being distributed to all participants and finalized in a "propose and dispute" process. The final result is stored on the Ethereum blockchain and can trigger additional transactions.
+                  Proposals and votes are being distributed to all participants
+                  and finalized in a "propose and dispute" process. The final
+                  result is stored on the Ethereum blockchain and can trigger
+                  additional transactions.
                 </p>
                 <p class="text-sm text-gray-500">
-                  Proposals have an author and a recipient, like an organization account, a single user or a smart contract.
-                  Recipients/organizations can restrict what proposals they accept, what actions they can trigger and who can vote on them, according to a custom voting power strategy.
+                  Proposals have an author and a recipient, like an organization
+                  account, a single user or a smart contract.
+                  Recipients/organizations can restrict what proposals they
+                  accept, what actions they can trigger and who can vote on
+                  them, according to a custom voting power strategy.
                 </p>
                 <p class="text-sm text-purple-900">
-                  No central authority is involved in the process! Signaling servers, hosted by the community, are used to connect users only. Data is exchanged peer-to-peer and storage is distributed.
+                  No central authority is involved in the process! Signaling
+                  servers, hosted by the community, are used to connect users
+                  only. Data is exchanged peer-to-peer and storage is
+                  distributed.
                 </p>
               </div>
 
               <div class="mt-5">
-                <button
-                  class="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
-                  @click="(isOpen = false)"
-                >
-                  Got it, thanks!
-                </button>
+                <button @click="isOpen = false">Got it, thanks!</button>
               </div>
             </DialogPanel>
           </TransitionChild>

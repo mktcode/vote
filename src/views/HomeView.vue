@@ -10,6 +10,7 @@ import IconUsers from "@/components/icons/IconUsers.vue";
 import IconStar from "@/components/icons/IconStar.vue";
 import IconSearch from "@/components/icons/IconSearch.vue";
 import WelcomeModal from "@/components/WelcomeModal.vue";
+import ProposalCreateModal from "@/components/ProposalCreateModal.vue";
 import {
   TransitionRoot,
   TransitionChild,
@@ -37,25 +38,22 @@ function openFinalizeModal() {
   isFinalizeModalOpen.value = true;
 }
 
+const isProposalCreateModalOpen = ref(false);
+
+function closeProposalCreateModal() {
+  isProposalCreateModalOpen.value = false;
+}
+function openProposalCreateModal() {
+  isProposalCreateModalOpen.value = true;
+}
+
 const { account, accountShort, connect, disconnect } = useWeb3();
 connect();
 
-const title = ref("Hello World");
-
-const createProposal = async () => {
-  const proposal = {
-    title: title.value,
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-    choices: ["Yes", "No"],
-    start: new Date().getTime(),
-    end: new Date().getTime() + 1000 * 60 * 60 * 24 * 7,
-    timestamp: undefined,
-  };
-  console.log(proposal);
-};
+const newProposalTitle = ref("Hello World!");
 
 const followedAccounts = ref([{}, {}, {}]);
-const followingAccounts = ref([{},{},{},{},{}]);
+const followingAccounts = ref([{}, {}, {}, {}, {}]);
 
 const freeBrowserStorage = ref(0);
 const usedBrowserStorage = ref(0);
@@ -115,9 +113,9 @@ navigator.storage.estimate().then((estimate) => {
     </header>
 
     <main v-if="account" class="p-3">
-      <input v-model="title" class="rounded-b-none" />
-      <button @click="createProposal" class="rounded-t-none">
-        create proposal
+      <input v-model="newProposalTitle" class="rounded-b-none" />
+      <button @click="openProposalCreateModal" class="rounded-t-none">
+        Create proposal
       </button>
 
       <div class="mt-5">
@@ -285,10 +283,11 @@ navigator.storage.estimate().then((estimate) => {
                   Since there is no central authority supervising the vote, a
                   strong ruleset, that everyone can verify, is required.<br />
                   <br />
-                  <strong>Anyone</strong> is allowed to finalize <strong>any</strong> proposal and it is technically
-                  possible to leave out or add (otherwise valid) votes after a proposal has ended.
-                  Therefore <strong>anyone</strong> can challenge a proposed result,
-                  within a set period, by also placing a bond.
+                  <strong>Anyone</strong> is allowed to finalize
+                  <strong>any</strong> proposal and it is technically possible
+                  to leave out or add (otherwise valid) votes after a proposal
+                  has ended. Therefore <strong>anyone</strong> can challenge a
+                  proposed result, within a set period, by also placing a bond.
                   <strong>
                     Challenged results go into a dispute period and the winner
                     takes their bond back, plus the loser's bond.<br />
@@ -317,4 +316,9 @@ navigator.storage.estimate().then((estimate) => {
   </TransitionRoot>
 
   <WelcomeModal />
+  <ProposalCreateModal
+    :is-open="isProposalCreateModalOpen"
+    :proposal-title="newProposalTitle"
+    @close="closeProposalCreateModal"
+  />
 </template>

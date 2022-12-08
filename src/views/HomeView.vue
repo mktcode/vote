@@ -38,10 +38,22 @@ const { account } = useWeb3();
     </div>
 
     <main class="rounded-xl overflow-hidden mx-3 divide-y z-10">
-      <Proposal :mode="'open'" @open-finalize-modal="(isFinalizeModalOpen = true)" />
-      <Proposal :mode="'finalizing-valid'" @open-finalize-modal="(isFinalizeModalOpen = true)" />
-      <Proposal :mode="'finalizing-invalid'" @open-finalize-modal="(isFinalizeModalOpen = true)" />
-      <Proposal :mode="'finalized'" @open-finalize-modal="(isFinalizeModalOpen = true)" />
+      <Proposal
+        :mode="'open'"
+        @open-finalize-modal="isFinalizeModalOpen = true"
+      />
+      <Proposal
+        :mode="'finalizing-valid'"
+        @open-finalize-modal="isFinalizeModalOpen = true"
+      />
+      <Proposal
+        :mode="'finalizing-invalid'"
+        @open-finalize-modal="isFinalizeModalOpen = true"
+      />
+      <Proposal
+        :mode="'finalized'"
+        @open-finalize-modal="isFinalizeModalOpen = true"
+      />
     </main>
   </div>
 

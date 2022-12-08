@@ -35,7 +35,10 @@ navigator.storage.estimate().then((estimate) => {
     <button @click="connect">Connect wallet</button>
   </header>
 
-  <header v-if="account" class="flex flex-col m-3 mt-5 bg-white rounded-xl overflow-hidden">
+  <header
+    v-if="account"
+    class="flex flex-col m-3 mt-5 bg-white rounded-xl overflow-hidden"
+  >
     <div class="flex">
       <button class="secondary inset flex-1">
         <IconSearch />
@@ -66,11 +69,14 @@ navigator.storage.estimate().then((estimate) => {
         <IconUsers class="mr-3" /> {{ followingAccounts.length }}
         followers
       </button>
-      <button @click="disconnect" class="secondary inset flex space-x-1 w-1/3">
+      <button class="secondary inset flex space-x-1">
         <IconStorage class="mr-1" />
         {{ prettyBytes(usedBrowserStorage) }}/{{
           prettyBytes(freeBrowserStorage)
         }}
+      </button>
+      <button class="secondary inset flex space-x-1">
+        <IconUsers class="mr-1" /> 27
       </button>
     </div>
   </header>

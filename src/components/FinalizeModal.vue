@@ -36,16 +36,13 @@ defineEmits<{
           loser's bond.<br />
         </strong>
         <br />
-        The downside of this is a delayed finalization of proposal results but the advantage is, that it is almost impossible to manipulate or cencor
+        The downside of this is a delayed finalization of proposal results but
+        the advantage is, that it is almost impossible to manipulate or cencor
         results and even the creator of a proposal can't stop its execution.
       </p>
     </template>
     <template #footer>
-      <button
-        @click="$emit('close')"
-      >
-        Got it, thanks!
-      </button>
+      <button @click="$emit('close')">Got it, thanks!</button>
     </template>
   </ModalBase>
 </template>

@@ -1,52 +1,23 @@
 <script setup lang="ts">
 import { ref } from "vue";
+import prettyBytes from "pretty-bytes";
 import { useWeb3 } from "@/composables/useWeb3";
 import IconCog from "@/components/icons/IconCog.vue";
 import IconDots from "@/components/icons/IconDots.vue";
 import IconEthereum from "@/components/icons/IconEthereum.vue";
-import IconShield from "@/components/icons/IconShield.vue";
 import IconStorage from "@/components/icons/IconStorage.vue";
 import IconLock from "@/components/icons/IconLock.vue";
 import IconUsers from "@/components/icons/IconUsers.vue";
 import IconStar from "@/components/icons/IconStar.vue";
 import IconSearch from "@/components/icons/IconSearch.vue";
+import FinalizeModal from "@/components/FinalizeModal.vue";
+import FollowersModal from "@/components/FollowersModal.vue";
 import WelcomeModal from "@/components/WelcomeModal.vue";
 import ProposalCreateModal from "@/components/ProposalCreateModal.vue";
-import {
-  TransitionRoot,
-  TransitionChild,
-  Dialog,
-  DialogPanel,
-  DialogTitle,
-} from "@headlessui/vue";
-import prettyBytes from "pretty-bytes";
 
-const isFollowedModalOpen = ref(false);
-
-function closeFollowedModal() {
-  isFollowedModalOpen.value = false;
-}
-function openFollowedModal() {
-  isFollowedModalOpen.value = true;
-}
-
+const isFollowersModalOpen = ref(false);
 const isFinalizeModalOpen = ref(false);
-
-function closeFinalizeModal() {
-  isFinalizeModalOpen.value = false;
-}
-function openFinalizeModal() {
-  isFinalizeModalOpen.value = true;
-}
-
 const isProposalCreateModalOpen = ref(false);
-
-function closeProposalCreateModal() {
-  isProposalCreateModalOpen.value = false;
-}
-function openProposalCreateModal() {
-  isProposalCreateModalOpen.value = true;
-}
 
 const { account, accountShort, connect, disconnect } = useWeb3();
 connect();
@@ -58,6 +29,7 @@ const followingAccounts = ref([{}, {}, {}, {}, {}]);
 
 const freeBrowserStorage = ref(0);
 const usedBrowserStorage = ref(0);
+
 navigator.storage.estimate().then((estimate) => {
   if (estimate.quota && estimate.usage) {
     freeBrowserStorage.value = estimate.quota - estimate.usage;
@@ -74,7 +46,7 @@ navigator.storage.estimate().then((estimate) => {
 
     <header v-if="account" class="flex flex-col p-3 pt-5 space-y-3">
       <div class="flex space-x-3">
-        <button @click="openFollowedModal" class="secondary flex-1">
+        <button class="secondary flex-1">
           <IconSearch />
         </button>
         <button @click="disconnect" class="secondary flex space-x-1 grow">
@@ -93,15 +65,15 @@ navigator.storage.estimate().then((estimate) => {
           <div>2.68 ETH</div>
           <div class="text-green-700">+0.07</div>
         </button>
-        <button @click="openFollowedModal" class="secondary flex-1">
+        <button class="secondary flex-1">
           <IconCog />
         </button>
       </div>
       <div class="flex space-x-3">
-        <button @click="openFollowedModal" class="secondary">
+        <button @click="isFollowersModalOpen = true" class="secondary">
           <IconStar class="mr-3" /> {{ followedAccounts.length }} followed
         </button>
-        <button @click="openFollowedModal" class="secondary">
+        <button @click="isFollowersModalOpen = true" class="secondary">
           <IconUsers class="mr-3" /> {{ followingAccounts.length }} following
           you
         </button>
@@ -116,7 +88,7 @@ navigator.storage.estimate().then((estimate) => {
 
     <main v-if="account" class="p-3">
       <input v-model="newProposalTitle" class="rounded-b-none" />
-      <button @click="openProposalCreateModal" class="rounded-t-none">
+      <button @click="isProposalCreateModalOpen = true" class="rounded-t-none">
         Create proposal
       </button>
 
@@ -163,7 +135,7 @@ navigator.storage.estimate().then((estimate) => {
           </div>
           <div class="mt-3">
             <button
-              @click="openFinalizeModal"
+              @click="isFinalizeModalOpen = true"
               class="secondary flex justify-between"
             >
               <div class="flex items-center mr-auto text-xl">
@@ -182,145 +154,21 @@ navigator.storage.estimate().then((estimate) => {
     </main>
   </div>
 
-  <TransitionRoot appear :show="isFollowedModalOpen" as="template">
-    <Dialog as="div" @close="closeFollowedModal" class="relative z-10">
-      <TransitionChild
-        as="template"
-        enter="duration-300 ease-out"
-        enter-from="opacity-0"
-        enter-to="opacity-100"
-        leave="duration-200 ease-in"
-        leave-from="opacity-100"
-        leave-to="opacity-0"
-      >
-        <div class="fixed inset-0 bg-black bg-opacity-25" />
-      </TransitionChild>
-
-      <div class="fixed inset-0 overflow-y-auto">
-        <div
-          class="flex min-h-full items-center justify-center p-4 text-center"
-        >
-          <TransitionChild
-            as="template"
-            enter="duration-300 ease-out"
-            enter-from="opacity-0 scale-95"
-            enter-to="opacity-100 scale-100"
-            leave="duration-200 ease-in"
-            leave-from="opacity-100 scale-100"
-            leave-to="opacity-0 scale-95"
-          >
-            <DialogPanel
-              class="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all"
-            >
-              <DialogTitle
-                as="h3"
-                class="text-lg font-medium leading-6 text-gray-900"
-              >
-                Payment successful
-              </DialogTitle>
-              <div class="mt-2">
-                <p class="text-sm text-gray-500">
-                  Your payment has been successfully submitted. We’ve sent you
-                  an email with all of the details of your order.
-                </p>
-              </div>
-
-              <div class="mt-4">
-                <button
-                  type="button"
-                  class="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
-                  @click="closeFollowedModal"
-                >
-                  Got it, thanks!
-                </button>
-              </div>
-            </DialogPanel>
-          </TransitionChild>
-        </div>
-      </div>
-    </Dialog>
-  </TransitionRoot>
-
-  <TransitionRoot appear :show="isFinalizeModalOpen" as="template">
-    <Dialog as="div" @close="closeFinalizeModal" class="relative z-10">
-      <TransitionChild
-        as="template"
-        enter="duration-300 ease-out"
-        enter-from="opacity-0"
-        enter-to="opacity-100"
-        leave="duration-200 ease-in"
-        leave-from="opacity-100"
-        leave-to="opacity-0"
-      >
-        <div class="fixed inset-0 bg-black bg-opacity-25" />
-      </TransitionChild>
-
-      <div class="fixed inset-0 overflow-y-auto">
-        <div
-          class="flex min-h-full items-center justify-center p-4 text-center"
-        >
-          <TransitionChild
-            as="template"
-            enter="duration-300 ease-out"
-            enter-from="opacity-0 scale-95"
-            enter-to="opacity-100 scale-100"
-            leave="duration-200 ease-in"
-            leave-from="opacity-100 scale-100"
-            leave-to="opacity-0 scale-95"
-          >
-            <DialogPanel
-              class="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all"
-            >
-              <DialogTitle
-                as="h3"
-                class="flex flex-col items-center text-lg font-medium leading-6 text-gray-900 mb-5"
-              >
-                <IconShield class="text-fuchsia-700 w-12 h-12" />
-                Finalize proposal
-              </DialogTitle>
-              <div class="mt-2">
-                <p class="text-sm text-gray-500">
-                  Finalizing a proposal means making it immutable, so that
-                  dependent actions can be initiated, like transferring funds.
-                  Since there is no central authority supervising the vote, a
-                  strong ruleset, that everyone can verify, is required.<br />
-                  <br />
-                  <strong>Anyone</strong> is allowed to finalize
-                  <strong>any</strong> proposal and it is technically possible
-                  to leave out or add (otherwise valid) votes after a proposal
-                  has ended. Therefore <strong>anyone</strong> can challenge a
-                  proposed result, within a set period, by also placing a bond.
-                  <strong>
-                    Challenged results go into a dispute period and the winner
-                    takes their bond back, plus the loser's bond.<br />
-                  </strong>
-                  <br />
-                  The advantage is, that it is almost impossible to manipulate
-                  or cencor results and even the creator of a proposal can't
-                  stop its execution.
-                </p>
-              </div>
-
-              <div class="mt-4">
-                <button
-                  type="button"
-                  class="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
-                  @click="closeFinalizeModal"
-                >
-                  Got it, thanks!
-                </button>
-              </div>
-            </DialogPanel>
-          </TransitionChild>
-        </div>
-      </div>
-    </Dialog>
-  </TransitionRoot>
-
   <WelcomeModal />
+  
+  <FollowersModal
+    :is-open="isFollowersModalOpen"
+    @close="isFollowersModalOpen = false"
+  />
+
+  <FinalizeModal
+    :is-open="isFinalizeModalOpen"
+    @close="isFinalizeModalOpen = false"
+  />
+
   <ProposalCreateModal
     :is-open="isProposalCreateModalOpen"
     :proposal-title="newProposalTitle"
-    @close="closeProposalCreateModal"
+    @close="isProposalCreateModalOpen = false"
   />
 </template>

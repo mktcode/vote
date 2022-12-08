@@ -284,9 +284,9 @@ navigator.storage.estimate().then((estimate) => {
                   Since there is no central authority supervising the vote, a
                   strong ruleset, that everyone can verify, is required.<br />
                   <br />
-                  Anyone is allowed to finalize a proposal and it is technically
-                  possible to manipulate the result. Therefore
-                  <strong>anyone</strong> can challenge a proposed result,
+                  <strong>Anyone</strong> is allowed to finalize <strong>any</strong> proposal and it is technically
+                  possible to leave out or add (otherwise valid) votes after a proposal has ended.
+                  Therefore <strong>anyone</strong> can challenge a proposed result,
                   within a set period, by also placing a bond.
                   <strong>
                     Challenged results go into a dispute period and the winner

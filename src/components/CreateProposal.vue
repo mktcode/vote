@@ -12,7 +12,7 @@ const { newProposalTitle } = useNewProposal();
   <div class="p-3">
     <input v-model="newProposalTitle" class="rounded-b-none text-lg" />
     <button @click="$emit('openCreateProposalModal')" class="rounded-t-none">
-      Create proposal
+      Create new proposal
     </button>
   </div>
 </template>

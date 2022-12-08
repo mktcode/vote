@@ -1,0 +1,15 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+button {
+  @apply w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-xl whitespace-nowrap flex items-center;
+}
+
+button.secondary {
+  @apply bg-gray-200 hover:bg-gray-300 text-gray-700;
+}
+
+input {
+  @apply bg-gray-100 appearance-none border-2 border-gray-100 rounded-xl w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500;
+}

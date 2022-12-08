@@ -1,90 +1,31 @@
 <script setup lang="ts">
 import { ref } from "vue";
-import prettyBytes from "pretty-bytes";
 import { useWeb3 } from "@/composables/useWeb3";
-import IconCog from "@/components/icons/IconCog.vue";
 import IconDots from "@/components/icons/IconDots.vue";
-import IconEthereum from "@/components/icons/IconEthereum.vue";
-import IconStorage from "@/components/icons/IconStorage.vue";
 import IconLock from "@/components/icons/IconLock.vue";
-import IconUsers from "@/components/icons/IconUsers.vue";
-import IconStar from "@/components/icons/IconStar.vue";
-import IconSearch from "@/components/icons/IconSearch.vue";
 import FinalizeModal from "@/components/FinalizeModal.vue";
 import FollowersModal from "@/components/FollowersModal.vue";
+import FollowingModal from "@/components/FollowingModal.vue";
 import WelcomeModal from "@/components/WelcomeModal.vue";
 import ProposalCreateModal from "@/components/ProposalCreateModal.vue";
+import TheHeader from "@/components/TheHeader.vue";
 
 const isFollowersModalOpen = ref(false);
+const isFollowingModalOpen = ref(false);
 const isFinalizeModalOpen = ref(false);
 const isProposalCreateModalOpen = ref(false);
 
-const { account, accountShort, connect, disconnect } = useWeb3();
-connect();
+const { account, accountShort } = useWeb3();
 
 const newProposalTitle = ref("Hello World!");
-
-const followedAccounts = ref([{}, {}, {}]);
-const followingAccounts = ref([{}, {}, {}, {}, {}]);
-
-const freeBrowserStorage = ref(0);
-const usedBrowserStorage = ref(0);
-
-navigator.storage.estimate().then((estimate) => {
-  if (estimate.quota && estimate.usage) {
-    freeBrowserStorage.value = estimate.quota - estimate.usage;
-    usedBrowserStorage.value = estimate.usage;
-  }
-});
 </script>
 
 <template>
   <div class="max-w-xl flex flex-col mx-auto">
-    <header v-if="!account" class="p-3 pt-5">
-      <button @click="connect">connect</button>
-    </header>
-
-    <header v-if="account" class="flex flex-col p-3 pt-5 space-y-3">
-      <div class="flex space-x-3">
-        <button class="secondary flex-1">
-          <IconSearch />
-        </button>
-        <button @click="disconnect" class="secondary flex space-x-1 grow">
-          <div
-            class="rounded-full w-5 h-5 bg-center bg-cover"
-            style="
-              background-image: url('https://ui-avatars.com/api/?background=0D8ABC&color=fff');
-            "
-          />
-          <div>
-            {{ accountShort }}
-          </div>
-        </button>
-        <button class="secondary flex space-x-1 flex-1">
-          <IconEthereum />
-          <div>2.68 ETH</div>
-          <div class="text-green-700">+0.07</div>
-        </button>
-        <button class="secondary flex-1">
-          <IconCog />
-        </button>
-      </div>
-      <div class="flex space-x-3">
-        <button @click="isFollowersModalOpen = true" class="secondary">
-          <IconStar class="mr-3" /> {{ followedAccounts.length }} followed
-        </button>
-        <button @click="isFollowersModalOpen = true" class="secondary">
-          <IconUsers class="mr-3" /> {{ followingAccounts.length }} following
-          you
-        </button>
-        <button @click="disconnect" class="secondary flex space-x-1 w-1/3">
-          <IconStorage class="mr-1" />
-          {{ prettyBytes(usedBrowserStorage) }}/{{
-            prettyBytes(freeBrowserStorage)
-          }}
-        </button>
-      </div>
-    </header>
+    <TheHeader
+      @open-followers-modal="isFollowersModalOpen = true"
+      @open-following-modal="isFollowingModalOpen = true"
+    />
 
     <main v-if="account" class="p-3">
       <input v-model="newProposalTitle" class="rounded-b-none" />
@@ -155,10 +96,15 @@ navigator.storage.estimate().then((estimate) => {
   </div>
 
   <WelcomeModal />
-  
+
   <FollowersModal
     :is-open="isFollowersModalOpen"
     @close="isFollowersModalOpen = false"
+  />
+
+  <FollowingModal
+    :is-open="isFollowingModalOpen"
+    @close="isFollowingModalOpen = false"
   />
 
   <FinalizeModal

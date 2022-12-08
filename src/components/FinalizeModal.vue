@@ -18,24 +18,23 @@ defineEmits<{
     </template>
     <template #content>
       <p class="text-sm text-gray-500">
-        Finalizing a proposal means making it immutable, so that
-        dependent actions can be initiated, like transferring funds.
-        Since there is no central authority supervising the vote, a
-        strong ruleset, that everyone can verify, is required.<br />
+        Finalizing a proposal means making it immutable, so that dependent
+        actions can be initiated, like transferring funds. Since there is no
+        central authority supervising the vote, a strong ruleset, that everyone
+        can verify, is required.<br />
         <br />
         <strong>Anyone</strong> is allowed to finalize
-        <strong>any</strong> proposal and it is technically possible
-        to leave out or add (otherwise valid) votes after a proposal
-        has ended. Therefore <strong>anyone</strong> can challenge a
-        proposed result, within a set period, by also placing a bond.
+        <strong>any</strong> proposal and it is technically possible to leave
+        out or add (otherwise valid) votes after a proposal has ended. Therefore
+        <strong>anyone</strong> can challenge a proposed result, within a set
+        period, by also placing a bond.
         <strong>
-          Challenged results go into a dispute period and the winner
-          takes their bond back, plus the loser's bond.<br />
+          Challenged results go into a dispute period and the winner takes their
+          bond back, plus the loser's bond.<br />
         </strong>
         <br />
-        The advantage is, that it is almost impossible to manipulate
-        or cencor results and even the creator of a proposal can't
-        stop its execution.
+        The advantage is, that it is almost impossible to manipulate or cencor
+        results and even the creator of a proposal can't stop its execution.
       </p>
     </template>
     <template #footer>

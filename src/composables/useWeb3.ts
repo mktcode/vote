@@ -17,6 +17,7 @@ export function useWeb3() {
 
     signer.value = provider.value.getSigner();
   }
+  connect();
 
   async function disconnect() {
     provider.value = null;

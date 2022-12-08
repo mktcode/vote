@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { ref } from "vue";
-import { useNewProposal } from "@/composables/useNewProposal";
 import { useWeb3 } from "@/composables/useWeb3";
 import IconDots from "@/components/icons/IconDots.vue";
 import IconLock from "@/components/icons/IconLock.vue";

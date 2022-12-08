@@ -62,10 +62,10 @@ const isOpen = ref(true);
                 </p>
                 <p class="text-sm text-gray-500">
                   Proposals have an author and a normal user, an organization's
-                  safe or any other smart contract as a recipient.
-                  The recipient can restrict what proposals to
-                  accept, what actions they can trigger and who can vote on
-                  them, using a custom voting power strategy.
+                  safe or any other compatible smart contract as a recipient.
+                  The recipient can restrict what proposals to accept, what
+                  actions they can trigger and who can vote on them, using a
+                  custom voting power strategy.
                 </p>
                 <p class="text-sm text-purple-900">
                   No central authority is involved in the process! Signaling

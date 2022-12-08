@@ -2,22 +2,38 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+  @apply bg-sky-800 text-gray-900 font-sans;
+}
+
 button {
-  @apply w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-xl whitespace-nowrap flex items-center;
+  @apply w-full bg-sky-500 hover:bg-sky-600 text-white font-bold py-2 px-4 rounded-xl whitespace-nowrap flex items-center shadow;
 }
 
 button.secondary {
-  @apply bg-gray-100 hover:bg-gray-200 text-gray-600;
+  @apply bg-gray-50 hover:bg-gray-200 text-gray-600;
 }
 
 input {
-  @apply bg-gray-100 appearance-none border-2 border-gray-100 rounded-xl w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500;
+  @apply bg-white appearance-none rounded-xl w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500;
+}
+
+input.secondary {
+  @apply bg-gray-100 focus:bg-gray-100;
 }
 
 textarea {
-  @apply bg-gray-100 appearance-none border-2 border-gray-100 rounded-xl w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500;
+  @apply bg-white appearance-none rounded-xl w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500;
+}
+
+textarea.secondary {
+  @apply bg-gray-100 focus:bg-gray-100;
 }
 
 select {
-  @apply relative bg-gray-100 appearance-none border-2 border-gray-100 rounded-xl w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500;
+  @apply relative bg-white appearance-none rounded-xl w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500;
+}
+
+select.secondary {
+  @apply bg-gray-100 focus:bg-gray-100;
 }

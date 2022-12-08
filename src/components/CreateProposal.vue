@@ -9,8 +9,8 @@ const { newProposalTitle } = useNewProposal();
 </script>
 
 <template>
-  <div>
-    <input v-model="newProposalTitle" class="rounded-b-none" />
+  <div class="p-3">
+    <input v-model="newProposalTitle" class="rounded-b-none text-lg" />
     <button @click="$emit('openCreateProposalModal')" class="rounded-t-none">
       Create proposal
     </button>

@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { ref } from "vue";
 import {
   TransitionRoot,
   TransitionChild,
@@ -6,23 +7,24 @@ import {
   DialogPanel,
   DialogTitle,
 } from "@headlessui/vue";
-import { ref } from "vue";
+import { useNewProposal } from "@/composables/useNewProposal";
 
-const props = defineProps<{
+defineProps<{
   isOpen: boolean;
-  proposalTitle: string;
 }>();
 
 defineEmits<{
   (e: "close"): void;
 }>();
 
+const { newProposalTitle } = useNewProposal();
+
 const proposalForm = ref<{
   to: string;
   title: string;
 }>({
   to: "mktcode.eth",
-  title: props.proposalTitle,
+  title: newProposalTitle.value,
 });
 
 enum PROPOSAL_FORM_STEPS {
@@ -92,7 +94,7 @@ const proposalFormStep = ref<PROPOSAL_FORM_STEPS>(PROPOSAL_FORM_STEPS.COMMON);
                       class="pl-16"
                     />
                   </div>
-                  <input type="text" v-model="proposalForm.title" />
+                  <input type="text" v-model="newProposalTitle" />
                   <textarea placeholder="Proposal description..." />
                   <div class="flex space-x-2">
                     <input type="date" v-model="proposalForm.title" />

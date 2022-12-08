@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref } from "vue";
+import { useNewProposal } from "@/composables/useNewProposal";
 import { useWeb3 } from "@/composables/useWeb3";
 import IconDots from "@/components/icons/IconDots.vue";
 import IconLock from "@/components/icons/IconLock.vue";
@@ -7,17 +8,16 @@ import FinalizeModal from "@/components/FinalizeModal.vue";
 import FollowersModal from "@/components/FollowersModal.vue";
 import FollowingModal from "@/components/FollowingModal.vue";
 import WelcomeModal from "@/components/WelcomeModal.vue";
-import ProposalCreateModal from "@/components/ProposalCreateModal.vue";
+import CreateProposal from "@/components/CreateProposal.vue";
+import CreateProposalModal from "@/components/CreateProposalModal.vue";
 import TheHeader from "@/components/TheHeader.vue";
 
 const isFollowersModalOpen = ref(false);
 const isFollowingModalOpen = ref(false);
 const isFinalizeModalOpen = ref(false);
-const isProposalCreateModalOpen = ref(false);
+const isCreateProposalModalOpen = ref(false);
 
 const { account, accountShort } = useWeb3();
-
-const newProposalTitle = ref("Hello World!");
 </script>
 
 <template>
@@ -28,10 +28,7 @@ const newProposalTitle = ref("Hello World!");
     />
 
     <main v-if="account" class="p-3">
-      <input v-model="newProposalTitle" class="rounded-b-none" />
-      <button @click="isProposalCreateModalOpen = true" class="rounded-t-none">
-        Create proposal
-      </button>
+      <CreateProposal @open-create-proposal-modal="isCreateProposalModalOpen = true" />
 
       <div class="mt-5">
         <div class="border rounded-xl p-3">
@@ -112,9 +109,8 @@ const newProposalTitle = ref("Hello World!");
     @close="isFinalizeModalOpen = false"
   />
 
-  <ProposalCreateModal
-    :is-open="isProposalCreateModalOpen"
-    :proposal-title="newProposalTitle"
-    @close="isProposalCreateModalOpen = false"
+  <CreateProposalModal
+    :is-open="isCreateProposalModalOpen"
+    @close="isCreateProposalModalOpen = false"
   />
 </template>

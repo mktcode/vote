@@ -19,7 +19,7 @@ const { account } = useWeb3();
 </script>
 
 <template>
-  <div class="max-w-xl flex flex-col mx-auto mb-10">
+  <div class="max-w-xl flex flex-col mx-auto mb-10 mt-5">
     <TheHeader
       @open-followers-modal="isFollowersModalOpen = true"
       @open-following-modal="isFollowingModalOpen = true"

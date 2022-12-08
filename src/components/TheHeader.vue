@@ -7,6 +7,7 @@ import IconCog from "@/components/icons/IconCog.vue";
 import IconSearch from "@/components/icons/IconSearch.vue";
 import IconStar from "./icons/IconStar.vue";
 import IconUsers from "./icons/IconUsers.vue";
+import IconEye from "./icons/IconEye.vue";
 import IconStorage from "./icons/IconStorage.vue";
 
 defineEmits<{
@@ -63,10 +64,10 @@ navigator.storage.estimate().then((estimate) => {
     </div>
     <div class="flex">
       <button @click="$emit('openFollowingModal')" class="secondary inset">
-        <IconStar class="mr-3" /> {{ followedAccounts.length }} followed
+        <IconStar class="mr-1" /> {{ followedAccounts.length }} followed
       </button>
       <button @click="$emit('openFollowersModal')" class="secondary inset">
-        <IconUsers class="mr-3" /> {{ followingAccounts.length }}
+        <IconEye class="mr-1" /> {{ followingAccounts.length }}
         followers
       </button>
       <button class="secondary inset flex space-x-1">

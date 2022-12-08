@@ -9,6 +9,7 @@ import IconLock from "@/components/icons/IconLock.vue";
 import IconUsers from "@/components/icons/IconUsers.vue";
 import IconStar from "@/components/icons/IconStar.vue";
 import IconSearch from "@/components/icons/IconSearch.vue";
+import WelcomeModal from "@/components/WelcomeModal.vue";
 import {
   TransitionRoot,
   TransitionChild,
@@ -53,8 +54,8 @@ const createProposal = async () => {
   console.log(proposal);
 };
 
-const followedAccounts = ref([]);
-const followingAccounts = ref([]);
+const followedAccounts = ref([{}, {}, {}]);
+const followingAccounts = ref([{},{},{},{},{}]);
 
 const freeBrowserStorage = ref(0);
 const usedBrowserStorage = ref(0);
@@ -274,7 +275,7 @@ navigator.storage.estimate().then((estimate) => {
                 as="h3"
                 class="flex flex-col items-center text-lg font-medium leading-6 text-gray-900 mb-5"
               >
-                <IconShield class="text-fuchsia-700 w-10 h-10" />
+                <IconShield class="text-fuchsia-700 w-12 h-12" />
                 Finalize proposal
               </DialogTitle>
               <div class="mt-2">
@@ -314,4 +315,6 @@ navigator.storage.estimate().then((estimate) => {
       </div>
     </Dialog>
   </TransitionRoot>
+
+  <WelcomeModal />
 </template>

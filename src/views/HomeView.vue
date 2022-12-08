@@ -3,6 +3,7 @@ import { ref } from "vue";
 import { useWeb3 } from "@/composables/useWeb3";
 import IconCog from "@/components/icons/IconCog.vue";
 import IconDots from "@/components/icons/IconDots.vue";
+import IconEthereum from "@/components/icons/IconEthereum.vue";
 import IconShield from "@/components/icons/IconShield.vue";
 import IconStorage from "@/components/icons/IconStorage.vue";
 import IconLock from "@/components/icons/IconLock.vue";
@@ -88,6 +89,7 @@ navigator.storage.estimate().then((estimate) => {
           </div>
         </button>
         <button class="secondary flex space-x-1 flex-1">
+          <IconEthereum />
           <div>2.68 ETH</div>
           <div class="text-green-700">+0.07</div>
         </button>

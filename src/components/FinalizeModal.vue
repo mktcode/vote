@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import IconShield from "@/components/icons/IconShield.vue";
 import ModalBase from "./ModalBase.vue";
 
 defineProps<{

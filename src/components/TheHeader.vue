@@ -31,8 +31,8 @@ navigator.storage.estimate().then((estimate) => {
 </script>
 
 <template>
-  <header v-if="!account" class="p-3 pt-5">
-    <button @click="connect">connect</button>
+  <header v-if="!account" class="p-3 pt-5 mb-3">
+    <button @click="connect">Connect wallet</button>
   </header>
 
   <header v-if="account" class="flex flex-col p-3 pt-5 space-y-3">

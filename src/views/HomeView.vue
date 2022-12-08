@@ -1,8 +1,6 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import { useWeb3 } from "@/composables/useWeb3";
-import IconDots from "@/components/icons/IconDots.vue";
-import IconLock from "@/components/icons/IconLock.vue";
 import FinalizeModal from "@/components/FinalizeModal.vue";
 import FollowersModal from "@/components/FollowersModal.vue";
 import FollowingModal from "@/components/FollowingModal.vue";
@@ -10,6 +8,7 @@ import WelcomeModal from "@/components/WelcomeModal.vue";
 import CreateProposal from "@/components/CreateProposal.vue";
 import CreateProposalModal from "@/components/CreateProposalModal.vue";
 import TheHeader from "@/components/TheHeader.vue";
+import Proposal from "@/components/Proposal.vue";
 
 const isFollowersModalOpen = ref(false);
 const isFollowingModalOpen = ref(false);
@@ -20,7 +19,7 @@ const { account } = useWeb3();
 </script>
 
 <template>
-  <div class="max-w-xl flex flex-col mx-auto">
+  <div class="max-w-xl flex flex-col mx-auto mb-10">
     <TheHeader
       @open-followers-modal="isFollowersModalOpen = true"
       @open-following-modal="isFollowingModalOpen = true"
@@ -29,72 +28,20 @@ const { account } = useWeb3();
     <CreateProposal
       v-if="account"
       @open-create-proposal-modal="isCreateProposalModalOpen = true"
+      class="mb-3"
     />
 
-    <div class="px-3 mt-3">
-      <button class="justify-center text-sm font-normal opacity-50">
+    <div class="px-3 -mb-5 z-0">
+      <button class="justify-center text-sm font-normal opacity-50 pb-7">
         3 new proposals
       </button>
     </div>
 
-    <main class="p-3">
-      <div class="bg-white rounded-xl p-3">
-        <div class="flex">
-          <div class="flex items-center space-x-1">
-            <div
-              class="rounded-full w-5 h-5 bg-center bg-cover"
-              style="
-                background-image: url('https://ui-avatars.com/api/?background=0D8ABC&color=fff');
-              "
-            />
-            <div class="text-gray-500">mktcode.eth</div>
-            <div class="text-gray-400">proposed 1d ago</div>
-          </div>
-          <IconDots class="text-gray-300 ml-auto" />
-        </div>
-        <div class="flex space-x-2 text-sm">
-          <div class="text-gray-500">to:</div>
-          <div class="text-gray-400">fabien.eth</div>
-        </div>
-        <h2 class="text-lg leading-6 font-medium text-gray-900 mt-1">
-          Unlock tokens in treasury
-        </h2>
-        <p class="mt-1 max-w-2xl text-sm text-gray-500">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa libero
-          nulla nesciunt doloremque ad culpa delectus aut.
-        </p>
-        <div class="space-y-1 mt-3">
-          <div
-            v-for="(option, i) in ['Yes', 'No']"
-            :key="i"
-            class="bg-gray-100 rounded-xl relative overflow-hidden"
-          >
-            <div
-              class="w-[25%] bg-sky-400 absolute h-full"
-              :class="{ 'w-[50%]': i }"
-            ></div>
-            <div class="text-right px-3 py-1">
-              <strong>{{ option }}</strong> 100%
-            </div>
-          </div>
-        </div>
-        <div class="mt-3">
-          <button
-            @click="isFinalizeModalOpen = true"
-            class="flex justify-between"
-          >
-            <div class="flex items-center mr-auto text-xl">
-              <IconLock class="w-9 h-9 mr-2" />
-              Finalize
-            </div>
-            <div class="flex flex-col items-end">
-              <div class="text-sm">Fee: 0.1 ETH</div>
-              <div class="text-xs font-normal">Bond: 1 ETH</div>
-              <div class="text-xs font-normal">5 Transactions</div>
-            </div>
-          </button>
-        </div>
-      </div>
+    <main class="rounded-xl overflow-hidden mx-3 divide-y z-10">
+      <Proposal :mode="'open'" @open-finalize-modal="(isFinalizeModalOpen = true)" />
+      <Proposal :mode="'finalizing-valid'" @open-finalize-modal="(isFinalizeModalOpen = true)" />
+      <Proposal :mode="'finalizing-invalid'" @open-finalize-modal="(isFinalizeModalOpen = true)" />
+      <Proposal :mode="'finalized'" @open-finalize-modal="(isFinalizeModalOpen = true)" />
     </main>
   </div>
 

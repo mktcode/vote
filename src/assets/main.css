@@ -14,6 +14,10 @@ button.secondary {
   @apply bg-gray-50 hover:bg-gray-200 text-gray-600;
 }
 
+button.warning {
+  @apply bg-amber-500 hover:bg-amber-600 text-white;
+}
+
 input {
   @apply bg-white appearance-none rounded-xl w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500;
 }

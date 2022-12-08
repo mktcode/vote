@@ -14,7 +14,7 @@ defineEmits<{
   (e: "openFollowingModal"): void;
 }>();
 
-const { account, accountShort, connect, disconnect } = useWeb3();
+const { account, accountShort, ensName, connect, disconnect } = useWeb3();
 
 const followedAccounts = ref([{}, {}, {}]);
 const followingAccounts = ref([{}, {}, {}, {}, {}]);
@@ -35,40 +35,38 @@ navigator.storage.estimate().then((estimate) => {
     <button @click="connect">Connect wallet</button>
   </header>
 
-  <header v-if="account" class="flex flex-col p-3 pt-5 space-y-3">
-    <div class="flex space-x-3">
-      <button class="secondary flex-1">
+  <header v-if="account" class="flex flex-col m-3 mt-5 bg-white rounded-xl overflow-hidden">
+    <div class="flex">
+      <button class="secondary inset flex-1">
         <IconSearch />
       </button>
-      <button @click="disconnect" class="secondary flex space-x-1 grow">
+      <button @click="disconnect" class="secondary inset flex space-x-1 grow">
         <div
           class="rounded-full w-5 h-5 bg-center bg-cover"
-          style="
-            background-image: url('https://ui-avatars.com/api/?background=0D8ABC&color=fff');
-          "
+          :style="`background-image: url('https://ui-avatars.com/api/?background=0D8ABC&color=fff');`"
         />
         <div>
-          {{ accountShort }}
+          {{ ensName || accountShort }}
         </div>
       </button>
-      <button class="secondary flex space-x-1 flex-1">
+      <button class="secondary inset flex space-x-1 flex-1">
         <IconEthereum />
         <div>2.68 ETH</div>
         <div class="text-green-700">+0.07</div>
       </button>
-      <button class="secondary flex-1">
+      <button class="secondary inset flex-1">
         <IconCog />
       </button>
     </div>
-    <div class="flex space-x-3">
-      <button @click="$emit('openFollowingModal')" class="secondary">
+    <div class="flex">
+      <button @click="$emit('openFollowingModal')" class="secondary inset">
         <IconStar class="mr-3" /> {{ followedAccounts.length }} followed
       </button>
-      <button @click="$emit('openFollowersModal')" class="secondary">
+      <button @click="$emit('openFollowersModal')" class="secondary inset">
         <IconUsers class="mr-3" /> {{ followingAccounts.length }}
-        following you
+        followers
       </button>
-      <button @click="disconnect" class="secondary flex space-x-1 w-1/3">
+      <button @click="disconnect" class="secondary inset flex space-x-1 w-1/3">
         <IconStorage class="mr-1" />
         {{ prettyBytes(usedBrowserStorage) }}/{{
           prettyBytes(freeBrowserStorage)

@@ -25,5 +25,5 @@ async function disconnect() {
 }
 
 export function useWeb3() {
-  return { provider, account, accountShort, signer, connect, disconnect };
+  return { provider, account, accountShort, ensName: 'mktcode.eth', signer, connect, disconnect };
 }

@@ -18,6 +18,10 @@ button.warning {
   @apply bg-amber-500 hover:bg-amber-600 text-white;
 }
 
+button.inset {
+  @apply rounded-none shadow-none;
+}
+
 input {
   @apply bg-white appearance-none rounded-xl w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500;
 }

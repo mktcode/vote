@@ -57,7 +57,7 @@ defineEmits<{
                 <slot name="content" />
               </div>
 
-              <div class="mt-4">
+              <div class="mt-4" v-if="$slots.footer">
                 <slot name="footer" />
               </div>
             </DialogPanel>

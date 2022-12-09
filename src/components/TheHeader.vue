@@ -4,7 +4,7 @@ import prettyBytes from "pretty-bytes";
 import { useWeb3 } from "@/composables/useWeb3";
 import IconCog from "@/components/icons/IconCog.vue";
 import IconSearch from "@/components/icons/IconSearch.vue";
-import IconUsers from "./icons/IconUsers.vue";
+import IconConnection from "./icons/IconConnection.vue";
 import IconWallet from "./icons/IconWallet.vue";
 import IconStorage from "./icons/IconStorage.vue";
 import { peer } from "@/peer";
@@ -48,26 +48,27 @@ setInterval(() => {
           {{ ensName || accountShort }}
         </div>
       </button>
-      <button class="secondary inset flex space-x-1 flex-1">
+      <button class="secondary inset flex space-x-1 flex-1 font-normal">
         <IconWallet />
         <div>2.68 ETH</div>
       </button>
-      <button class="secondary inset flex space-x-1">
+      <button class="secondary inset flex flex-1 space-x-1 font-normal">
         <IconStorage class="mr-2" />
-        {{ prettyBytes(usedBrowserStorage) }}/{{
-          prettyBytes(freeBrowserStorage)
-        }}
+        {{ prettyBytes(usedBrowserStorage) }}
       </button>
-      <button class="secondary inset flex flex-1 space-x-1">
-        <IconUsers class="mr-2" /> {{ peerCount }}
-      </button>
-    </div>
-    <div class="flex">
-      <button class="secondary inset">
-        <IconSearch />
+      <button class="secondary inset flex flex-1 space-x-1 font-normal">
+        <IconConnection class="mr-2" /> {{ peerCount }}
       </button>
       <button class="secondary inset flex-1">
         <IconCog />
+      </button>
+    </div>
+    <div class="flex">
+      <button class="secondary inset group">
+        <IconSearch class="mr-2 opacity-30" />
+        <div class="opacity-30 font-normal">
+          Search profiles and proposals...
+        </div>
       </button>
     </div>
   </header>

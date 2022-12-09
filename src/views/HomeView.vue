@@ -37,7 +37,7 @@ const { account } = useWeb3();
       </button>
     </div>
 
-    <main class="rounded-xl overflow-hidden mx-3 divide-y z-10">
+    <main class="rounded-xl overflow-hidden mx-3 divide-y-8 divide-gray-100 z-10">
       <Proposal
         :mode="'open'"
         @open-finalize-modal="isFinalizeModalOpen = true"

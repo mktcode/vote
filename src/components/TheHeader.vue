@@ -9,6 +9,7 @@ import IconStar from "./icons/IconStar.vue";
 import IconUsers from "./icons/IconUsers.vue";
 import IconEye from "./icons/IconEye.vue";
 import IconStorage from "./icons/IconStorage.vue";
+import { peer } from "@/peer";
 
 defineEmits<{
   (e: "openFollowersModal"): void;
@@ -29,6 +30,13 @@ navigator.storage.estimate().then((estimate) => {
     usedBrowserStorage.value = estimate.usage;
   }
 });
+
+const peerCount = ref(0);
+setInterval(() => {
+  peer.listAllPeers((peers: any) => {
+    peerCount.value = peers.length;
+  })
+}, 1000);
 </script>
 
 <template>
@@ -77,7 +85,7 @@ navigator.storage.estimate().then((estimate) => {
         }}
       </button>
       <button class="secondary inset flex space-x-1">
-        <IconUsers class="mr-1" /> 27
+        <IconUsers class="mr-1" /> {{ peerCount }}
       </button>
     </div>
   </header>

@@ -50,7 +50,7 @@ const isOpen = ref(true);
               </DialogTitle>
               <div class="mt-2 space-y-3">
                 <p class="font-bold text-gray-700">
-                  This is a proof of concept to demonstrate a fully
+                  This is a proof-of-concept to demonstrate a fully
                   decentralized voting system with on-chain execution
                   capabilities.
                 </p>

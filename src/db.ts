@@ -5,13 +5,13 @@ export interface Proposal {
   from: string;
   to: string;
   title: string;
-  body: string;
+  choices: string[];
 }
 
 export interface Vote {
   hash?: string;
   proposalId: string;
-  choice: boolean;
+  choice: number;
 }
 
 export class Database extends Dexie {

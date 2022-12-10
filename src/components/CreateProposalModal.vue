@@ -11,7 +11,7 @@ defineEmits<{
   (e: "close"): void;
 }>();
 
-const { newProposalTitle } = useNewProposal();
+const { newProposalTitle, addProposal } = useNewProposal();
 
 const proposalForm = ref<{
   to: string;
@@ -98,7 +98,9 @@ const proposalFormStep = ref<PROPOSAL_FORM_STEPS>(PROPOSAL_FORM_STEPS.COMMON);
               Add transactions
             </button>
           </div>
-          <button @click="$emit('close')">Create proposal</button>
+          <button @click="addProposal(), $emit('close')">
+            Create proposal
+          </button>
         </div>
       </div>
 
@@ -121,7 +123,7 @@ const proposalFormStep = ref<PROPOSAL_FORM_STEPS>(PROPOSAL_FORM_STEPS.COMMON);
             >
               Back
             </button>
-            <button class="grow" @click="$emit('close')">
+            <button class="grow" @click="addProposal(), $emit('close')">
               Create proposal
             </button>
           </div>

@@ -3,12 +3,11 @@
 @tailwind utilities;
 
 body {
-  @apply text-gray-900 font-sans;
-  background-image: radial-gradient( circle farthest-corner at 10% 20%,  rgba(0,221,214,0.2) 0%, rgba(51,102,255,0.2) 90% );
+  @apply bg-gray-100 text-gray-900 font-sans;
 }
 
 button {
-  @apply bg-sky-500 hover:bg-sky-600 text-white font-bold py-2 px-4 rounded-xl whitespace-nowrap flex items-center shadow;
+  @apply bg-sky-500 hover:bg-sky-600 text-white font-bold py-2 px-4 rounded-xl whitespace-nowrap flex items-center shadow-md;
 }
 
 button.secondary {
@@ -20,7 +19,7 @@ button.warning {
 }
 
 button.inset {
-  @apply rounded-none shadow-none;
+  @apply bg-transparent  shadow-none;
 }
 
 input {

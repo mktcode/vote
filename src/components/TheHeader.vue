@@ -36,7 +36,7 @@ setInterval(() => {
 
   <header
     v-if="account"
-    class="flex flex-col m-3 mt-5 bg-white rounded-xl overflow-hidden"
+    class="flex flex-col mx-3"
   >
     <div class="flex">
       <button @click="disconnect" class="secondary inset flex space-x-1 grow">
@@ -48,28 +48,26 @@ setInterval(() => {
           {{ ensName || accountShort }}
         </div>
       </button>
-      <button class="secondary inset flex space-x-1 flex-1 font-normal">
+      <button class="secondary inset flex space-x-1 font-normal">
         <IconWallet />
         <div>2.68 ETH</div>
       </button>
-      <button class="secondary inset flex flex-1 space-x-1 font-normal">
+      <button class="secondary inset flex space-x-1 font-normal">
         <IconStorage class="mr-2" />
         {{ prettyBytes(usedBrowserStorage) }}
       </button>
-      <button class="secondary inset flex flex-1 space-x-1 font-normal">
+      <button class="secondary inset flex space-x-1 font-normal">
         <IconConnection class="mr-2" /> {{ peerCount }}
       </button>
-      <button class="secondary inset flex-1">
+      <button class="secondary inset">
         <IconCog />
       </button>
     </div>
-    <div class="flex">
-      <button class="w-full secondary inset group">
-        <IconSearch class="mr-2 opacity-30" />
-        <div class="opacity-30 font-normal">
-          Search profiles and proposals...
-        </div>
-      </button>
-    </div>
+    <button class="w-full secondary inset group h-12 mt-3">
+      <IconSearch class="mr-2 opacity-30" />
+      <div class="opacity-30 font-normal">
+        Search profiles and proposals...
+      </div>
+    </button>
   </header>
 </template>

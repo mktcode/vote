@@ -13,13 +13,12 @@ const { account } = useWeb3();
 </script>
 
 <template>
-  <div class="max-w-xl flex flex-col mx-auto mb-10 mt-5">
+  <div class="max-w-xl flex flex-col mx-auto mt-3">
     <TheHeader />
 
     <CreateProposal
       v-if="account"
       @open-create-proposal-modal="isCreateProposalModalOpen = true"
-      class="mb-3"
     />
 
     <ProposalFeed />

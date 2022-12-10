@@ -1,6 +1,18 @@
-# vote
+# Phorum - DAO voting and execution
 
-This template should help get you started developing with Vue 3 in Vite.
+Phorum can be hosted by DAOs (or its community) to hold votes and transfer assets based on results, in a fully decentralized way.
+
+## Distributed storage
+
+As a DAO you don't need to run expensive infrastructure nor rely on third parties.
+Proposals and votes are distributed among members,
+making Phorum cheap to run and censorship resistent at the same time.
+
+## Finalization and execution
+
+...
+
+# Development
 
 ## Recommended IDE Setup
 

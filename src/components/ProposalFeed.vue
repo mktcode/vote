@@ -38,7 +38,11 @@ setInterval(() => {
       class="rounded-xl overflow-hidden mx-3 divide-y-8 divide-gray-100 z-10"
     >
       <ProposalCard
-        :mode="'open'"
+        :mode="'proposal-running'"
+        @open-finalize-modal="isFinalizeModalOpen = true"
+      />
+      <ProposalCard
+        :mode="'proposal-ended'"
         @open-finalize-modal="isFinalizeModalOpen = true"
       />
       <ProposalCard

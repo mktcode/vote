@@ -67,12 +67,14 @@ const isOpen = ref(true);
                   actions they can trigger and who can vote on them, using a
                   custom voting power strategy.
                 </p>
-                <p class="text-sm text-purple-900">
-                  No central authority is involved in the process! Signaling
-                  servers, hosted by the community, are used to connect users
-                  only. Data is exchanged peer-to-peer and storage is
-                  distributed.
-                </p>
+                <div class="rounded-xl bg-sky-100 px-4 py-3">
+                  <p class="text-sm text-sky-900">
+                    No central authority is involved in the process! Signaling
+                    servers, hosted by the community, are used to connect users
+                    only. Data is exchanged peer-to-peer and storage is
+                    distributed.
+                  </p>
+                </div>
               </div>
 
               <div class="mt-5">

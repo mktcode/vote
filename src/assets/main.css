@@ -4,7 +4,7 @@
 
 body {
   @apply text-gray-900 font-sans;
-  background-image: radial-gradient( circle farthest-corner at 10% 20%,  rgba(0,221,214,0.1) 0%, rgba(51,102,255,0.1) 90% );
+  background-image: radial-gradient( circle farthest-corner at 10% 20%,  rgba(0,221,214,0.2) 0%, rgba(51,102,255,0.2) 90% );
 }
 
 button {

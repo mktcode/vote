@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import IconCheckCircle from "@/components/icons/IconCheckCircle.vue";
 import IconDots from "@/components/icons/IconDots.vue";
 import IconLock from "@/components/icons/IconLock.vue";
 import IconClock from "@/components/icons/IconClock.vue";
@@ -6,7 +7,7 @@ import IconEye from "./icons/IconEye.vue";
 import IconWarning from "@/components/icons/IconWarning.vue";
 
 defineProps<{
-  mode: "open" | "finalizing-valid" | "finalizing-invalid" | "finalized";
+  mode: "proposal-running" | "proposal-ended" | "finalizing-valid" | "finalizing-invalid" | "finalized";
 }>();
 
 defineEmits<{
@@ -39,26 +40,50 @@ defineEmits<{
     <h2 class="text-lg leading-6 font-medium text-gray-900 mt-1">
       Unlock tokens in treasury
     </h2>
-    <p class="mt-1 max-w-2xl text-sm text-gray-500">
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa libero nulla
-      nesciunt doloremque ad culpa delectus aut.
-    </p>
-    <div class="space-y-1 mt-3">
+    <div class="bg-gray-50 rounded-xl mt-3 overflow-hidden">
       <div
-        v-for="(option, i) in ['Yes', 'No']"
+        v-for="(option, i) in ['Yes', 'No', 'Abstain']"
         :key="i"
-        class="bg-gray-100 rounded-xl relative overflow-hidden"
+        class="relative overflow-hidden"
       >
         <div
-          class="w-[25%] bg-sky-400 absolute h-full"
-          :class="{ 'w-[50%]': i }"
+          class="bg-sky-600 absolute h-full rounded-r-xl border-b border-gray-50 z-0"
+          :style="`width: ${75 - i * 25}%; opacity: ${(100 - i * 15) / 100};`"
         ></div>
-        <div class="text-right px-3 py-1">
-          <strong>{{ option }}</strong> 100%
+        <div class="flex justify-between px-3 py-1 relative z-10">
+          <strong class="text-sky-50">{{ option }}</strong>
+          <div class="text-gray-400 text-sm">
+            {{ 50 - i * 15 }}%
+          </div>
         </div>
       </div>
     </div>
     <div class="mt-3">
+      <div
+        v-if="mode === 'proposal-running'"
+        class="w-full bg-gray-50 text-gray-600 font-bold rounded-xl whitespace-nowrap flex items-center relative overflow-hidden"
+      >
+        <div
+          class="w-2/3 bg-teal-500 absolute bottom-0 h-1"
+        />
+        <div class="flex w-full justify-between py-2 px-4 relative">
+          <div>862 votes</div>
+          <div class="opacity-50">Remaining 1d 2h</div>
+        </div>
+      </div>
+      <button
+        v-if="mode === 'proposal-ended'"
+        @click="$emit('openFinalizeModal')"
+        class="flex justify-between"
+      >
+        <div class="flex items-center mr-auto text-xl">
+          <IconLock class="w-9 h-9 mr-2" />
+          Finalize
+        </div>
+        <div class="opacity-50">
+          All peers have the same result.
+        </div>
+      </button>
       <button
         v-if="mode === 'finalizing-invalid'"
         @click="$emit('openFinalizeModal')"
@@ -67,14 +92,10 @@ defineEmits<{
         <div class="flex flex-col">
           <div class="flex items-center mr-auto text-xl">
             <IconWarning class="w-9 h-9 mr-2" />
-            Finalizing
+            Dispute
           </div>
-          <div class="text-sm">Differs from your data! (and 25/27 peers)</div>
         </div>
-        <div class="flex flex-col items-end">
-          <div class="text-xs font-normal">Bond: 1 ETH</div>
-          <div class="text-xs font-normal">5 Transactions</div>
-        </div>
+        <div class="opacity-50">25/27 peers disagree. 28m 42s</div>
       </button>
       <button
         v-if="mode === 'finalizing-valid'"
@@ -86,28 +107,9 @@ defineEmits<{
             <IconClock class="w-9 h-9 mr-2" />
             Finalizing
           </div>
-          <div class="text-sm">
-            Proposed data matches yours! (and 27/27 peers)
-          </div>
         </div>
-        <div class="flex flex-col items-end">
-          <div class="text-xs font-normal">Bond: 1 ETH</div>
-          <div class="text-xs font-normal">5 Transactions</div>
-        </div>
-      </button>
-      <button
-        v-if="mode === 'open'"
-        @click="$emit('openFinalizeModal')"
-        class="flex justify-between"
-      >
-        <div class="flex items-center mr-auto text-xl">
-          <IconLock class="w-9 h-9 mr-2" />
-          Finalize
-        </div>
-        <div class="flex flex-col items-end">
-          <div class="text-sm">Fee: 0.1 ETH</div>
-          <div class="text-xs font-normal">Bond: 1 ETH</div>
-          <div class="text-xs font-normal">5 Transactions</div>
+        <div class="opacity-50">
+          28m 42s
         </div>
       </button>
       <button
@@ -117,13 +119,12 @@ defineEmits<{
       >
         <div class="flex flex-col">
           <div class="flex items-center mr-auto text-xl">
-            <IconLock class="w-9 h-9 mr-2" />
-            Finalized
+            <IconCheckCircle class="w-9 h-9 mr-2" />
+            Final
           </div>
-          <div class="text-sm">Execute 5 Transactions.</div>
         </div>
-        <div class="flex flex-col items-end">
-          <div class="text-sm">Fee: 0.1 ETH</div>
+        <div class="opacity-50">
+          Execute 5 transactions
         </div>
       </button>
     </div>

@@ -1,8 +1,8 @@
-import { Peer } from 'peerjs'
+import { Peer } from "peerjs";
 
 export const peer = new Peer({
-  host: 'localhost',
+  host: "localhost",
   port: 9000,
-  path: '/',
+  path: "/",
   debug: 2,
-})
+});

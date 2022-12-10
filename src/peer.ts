@@ -2,12 +2,7 @@ import { verifyMessage } from "ethers/lib/utils";
 import { Peer } from "peerjs";
 import { db } from "./db";
 
-export const peer = new Peer({
-  host: "localhost",
-  port: 9000,
-  path: "/",
-  debug: 2,
-});
+export const peer = new Peer({ host: "phorum-signal.mktcode.uber.space" });
 
 interface Message {
   type: "proposal" | "vote";

@@ -14,7 +14,11 @@ interface Message {
 peer.on("connection", (connection: any) => {
   connection.on("data", async (message: Message) => {
     if (message.type !== "proposal") return;
-    if (message.from !== verifyMessage(message.payload.hash, message.signature).toLowerCase()) return;
+    if (
+      message.from !==
+      verifyMessage(message.payload.hash, message.signature).toLowerCase()
+    )
+      return;
 
     await db.proposals.add(message.payload);
   });

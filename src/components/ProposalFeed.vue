@@ -9,7 +9,7 @@ import FinalizeModal from "@/components/FinalizeModal.vue";
 
 const proposals = useObservable<Proposal[]>(
   from(liveQuery(() => db.proposals.toArray()))
-)
+);
 
 const isFinalizeModalOpen = ref(false);
 const newProposalsCount = ref(0);

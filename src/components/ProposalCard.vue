@@ -30,7 +30,9 @@ defineEmits<{
         <div class="flex items-center space-x-2 leading-4">
           <div
             class="rounded-full w-8 h-8 bg-center bg-cover"
-            style="background-image: url('https://ui-avatars.com/api/?background=0D8ABC&color=fff');"
+            style="
+              background-image: url('https://ui-avatars.com/api/?background=0D8ABC&color=fff');
+            "
           />
           <div>
             <div class="flex space-x-2">

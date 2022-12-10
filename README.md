@@ -8,11 +8,27 @@ As a DAO you don't need to run expensive infrastructure nor rely on third partie
 Proposals and votes are distributed among members,
 making Phorum cheap to run and censorship resistent at the same time.
 
-## Finalization and execution
-
-...
-
 # Development
+
+You need to run a [peerjs signaling server](https://github.com/peers/peerjs-server) to connect peers.
+
+```sh
+# Install peer
+$ npm install peer -g
+```
+
+```sh
+# Run signaling server with peer discover
+$ peerjs --port 9000 --allow_discovery
+```
+
+No you can run the app.
+
+```sh
+$ npm run dev
+```
+
+Open the app in multiple browsers at `http://localhost:5173/`.
 
 ## Recommended IDE Setup
 

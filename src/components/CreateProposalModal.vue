@@ -62,7 +62,10 @@ const proposalFormStep = ref<PROPOSAL_FORM_STEPS>(PROPOSAL_FORM_STEPS.COMMON);
 
         <div class="mt-5 flex space-x-2">
           <button class="secondary" @click="$emit('close')">Cancel</button>
-          <button @click="proposalFormStep = PROPOSAL_FORM_STEPS.VOTING">
+          <button
+            class="grow"
+            @click="proposalFormStep = PROPOSAL_FORM_STEPS.VOTING"
+          >
             Add vote options
           </button>
         </div>
@@ -83,12 +86,15 @@ const proposalFormStep = ref<PROPOSAL_FORM_STEPS>(PROPOSAL_FORM_STEPS.COMMON);
         <div class="mt-5 flex flex-col space-y-2">
           <div class="flex space-x-2">
             <button
-              class="secondary"
+              class="secondary grow"
               @click="proposalFormStep = PROPOSAL_FORM_STEPS.COMMON"
             >
               Back
             </button>
-            <button @click="proposalFormStep = PROPOSAL_FORM_STEPS.EXECUTION">
+            <button
+              class="grow"
+              @click="proposalFormStep = PROPOSAL_FORM_STEPS.EXECUTION"
+            >
               Add transactions
             </button>
           </div>
@@ -104,18 +110,20 @@ const proposalFormStep = ref<PROPOSAL_FORM_STEPS>(PROPOSAL_FORM_STEPS.COMMON);
             reflect multiple budget allocations, that can be executed based on
             the winning option.
           </p>
-          <button>Add transaction set</button>
+          <button class="w-full">Add transaction set</button>
         </div>
 
         <div class="mt-5 flex flex-col space-y-2">
           <div class="flex space-x-2">
             <button
-              class="secondary"
+              class="grow secondary"
               @click="proposalFormStep = PROPOSAL_FORM_STEPS.VOTING"
             >
               Back
             </button>
-            <button @click="$emit('close')">Create proposal</button>
+            <button class="grow" @click="$emit('close')">
+              Create proposal
+            </button>
           </div>
         </div>
       </div>

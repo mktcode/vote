@@ -78,7 +78,9 @@ const isOpen = ref(true);
               </div>
 
               <div class="mt-5">
-                <button @click="isOpen = false">Got it, thanks!</button>
+                <button @click="isOpen = false" class="w-full">
+                  Got it, thanks!
+                </button>
               </div>
             </DialogPanel>
           </TransitionChild>

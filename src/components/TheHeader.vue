@@ -26,18 +26,15 @@ setInterval(() => {
   peer.listAllPeers((peers: any) => {
     peerCount.value = peers.length;
   });
-}, 1000);
+}, 2000);
 </script>
 
 <template>
-  <header v-if="!account" class="p-3 pt-5 mb-3">
-    <button @click="connect">Connect wallet</button>
+  <header v-if="!account" class="p-3">
+    <button @click="connect" class="w-full">Connect wallet</button>
   </header>
 
-  <header
-    v-if="account"
-    class="flex flex-col mx-3"
-  >
+  <header v-if="account" class="flex flex-col mx-3">
     <div class="flex">
       <button @click="disconnect" class="secondary inset flex space-x-1 grow">
         <div
@@ -65,9 +62,7 @@ setInterval(() => {
     </div>
     <button class="w-full secondary inset group h-12 mt-3">
       <IconSearch class="mr-2 opacity-30" />
-      <div class="opacity-30 font-normal">
-        Search profiles and proposals...
-      </div>
+      <div class="opacity-30 font-normal">Search profiles and proposals...</div>
     </button>
   </header>
 </template>

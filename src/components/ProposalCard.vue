@@ -8,7 +8,12 @@ import IconWallet from "@/components/icons/IconWallet.vue";
 import IconWarning from "@/components/icons/IconWarning.vue";
 
 defineProps<{
-  mode: "proposal-running" | "proposal-ended" | "finalizing-valid" | "finalizing-invalid" | "finalized";
+  mode:
+    | "proposal-running"
+    | "proposal-ended"
+    | "finalizing-valid"
+    | "finalizing-invalid"
+    | "finalized";
 }>();
 
 defineEmits<{
@@ -59,14 +64,12 @@ defineEmits<{
         ></div>
         <div class="flex justify-between px-3 py-1 relative">
           <strong class="text-sky-50">{{ option }}</strong>
-          <div class="text-gray-400 text-sm">
-            {{ 50 - i * 15 }}%
-          </div>
+          <div class="text-gray-400 text-sm">{{ 50 - i * 15 }}%</div>
         </div>
       </div>
     </div>
     <div class="p-3">
-      <div 
+      <div
         v-if="mode === 'proposal-running'"
         class="flex justify-between items-center text-gray-600 font-bold"
       >
@@ -91,7 +94,10 @@ defineEmits<{
             <div>862 votes</div>
             <div class="opacity-50">Results locked in: 28m 42s</div>
           </div>
-          <button @click="$emit('openFinalizeModal')" class="flex items-center warning">
+          <button
+            @click="$emit('openFinalizeModal')"
+            class="flex items-center warning"
+          >
             <IconWarning class="w-9 h-9 mr-2" />
             Dispute result
           </button>
@@ -103,7 +109,10 @@ defineEmits<{
             <div>862 votes</div>
             <div class="opacity-50">Results locked in: 34m 20s</div>
           </div>
-          <button @click="$emit('openFinalizeModal')" class="flex items-center secondary shadow-none">
+          <button
+            @click="$emit('openFinalizeModal')"
+            class="flex items-center secondary shadow-none"
+          >
             <IconHandshake class="w-9 h-9 mr-2" />
             All observers agree.
             <IconInfoCircle class="w-9 h-9 ml-2 text-gray-300" />

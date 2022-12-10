@@ -27,7 +27,7 @@ setInterval(() => {
       <div class="px-3 -mb-5 z-0">
         <button
           @click="newProposalsCount = 0"
-          class="justify-center text-sm font-normal opacity-50 pb-7"
+          class="w-full justify-center text-sm font-normal opacity-50 pb-7"
         >
           {{ newProposalsCount }} new proposals
         </button>
@@ -35,7 +35,7 @@ setInterval(() => {
     </TransitionRoot>
 
     <main
-      class="rounded-xl overflow-hidden mx-3 divide-y-8 divide-gray-100 z-10"
+      class="rounded-xl overflow-hidden mx-3 divide-y-4 divide-gray-100 z-10"
     >
       <ProposalCard
         :mode="'proposal-running'"

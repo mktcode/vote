@@ -64,7 +64,7 @@ setInterval(() => {
       </button>
     </div>
     <div class="flex">
-      <button class="secondary inset group">
+      <button class="w-full secondary inset group">
         <IconSearch class="mr-2 opacity-30" />
         <div class="opacity-30 font-normal">
           Search profiles and proposals...

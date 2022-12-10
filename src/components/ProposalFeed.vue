@@ -42,14 +42,25 @@ setInterval(() => {
     </TransitionRoot>
 
     <main
+      v-if="proposals && proposals.length > 0"
       class="rounded-t-xl overflow-hidden mx-3 divide-y-4 divide-gray-100 shadow-lg mt-3"
     >
       <ProposalCard
         v-for="proposal in proposals"
         :key="proposal.hash"
+        :proposal="proposal"
         :mode="'proposal-running'"
         @open-finalize-modal="isFinalizeModalOpen = true"
       />
+    </main>
+
+    <main v-else>
+      <div class="flex flex-col items-center justify-center py-5">
+        <div class="text-gray-400 text-2xl">No proposals yet</div>
+        <div class="text-gray-400 text-sm mt-2">
+          Create a new proposal to get started.
+        </div>
+      </div>
     </main>
   </div>
 

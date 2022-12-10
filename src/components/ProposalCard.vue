@@ -6,8 +6,10 @@ import IconInfoCircle from "@/components/icons/IconInfoCircle.vue";
 import IconLock from "@/components/icons/IconLock.vue";
 import IconWallet from "@/components/icons/IconWallet.vue";
 import IconWarning from "@/components/icons/IconWarning.vue";
+import type { Proposal } from "@/db";
 
 defineProps<{
+  proposal: Proposal;
   mode:
     | "proposal-running"
     | "proposal-ended"
@@ -28,9 +30,7 @@ defineEmits<{
         <div class="flex items-center space-x-2 leading-4">
           <div
             class="rounded-full w-8 h-8 bg-center bg-cover"
-            style="
-              background-image: url('https://ui-avatars.com/api/?background=0D8ABC&color=fff');
-            "
+            style="background-image: url('https://ui-avatars.com/api/?background=0D8ABC&color=fff');"
           />
           <div>
             <div class="flex space-x-2">
@@ -49,7 +49,7 @@ defineEmits<{
         <IconDots class="text-gray-300" />
       </div>
       <h2 class="text-xl leading-6 font-medium text-gray-900 mt-3">
-        Unlock tokens in treasury
+        {{ proposal.title }}
       </h2>
     </div>
     <div class="bg-gray-50">

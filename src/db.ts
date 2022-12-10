@@ -6,6 +6,7 @@ export interface Proposal {
   to: string;
   title: string;
   choices: string[];
+  authorTimestamp: number;
 }
 
 export interface Vote {

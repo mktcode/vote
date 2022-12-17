@@ -23,9 +23,9 @@ defineEmits<{
 
 <template>
   <div class="bg-white">
-    <div class="px-3 py-4">
+    <div>
       <div class="flex">
-        <div class="flex items-center space-x-2 leading-4">
+        <div class="flex items-center space-x-2 leading-4 p-3 pb-0">
           <div
             class="rounded-full w-6 h-6 bg-center bg-cover"
             style="
@@ -37,9 +37,11 @@ defineEmits<{
             <div class="text-gray-400">1d ago</div>
           </div>
         </div>
-        <IconDots class="ml-auto text-gray-300" />
+        <button class="ml-auto inset secondary opacity-30 rounded-tl-none rounded-br-none">
+          <IconDots />
+        </button>
       </div>
-      <h2 class="text-xl leading-6 font-medium text-gray-900 mt-3">
+      <h2 class="text-xl leading-6 font-medium text-gray-900 p-3">
         {{ proposal.title }}
       </h2>
     </div>

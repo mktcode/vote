@@ -24,16 +24,15 @@ navigator.storage.estimate().then((estimate) => {
 </script>
 
 <template>
-  <header v-if="!account" class="p-3">
-    <button @click="connect" class="w-full">Connect wallet</button>
-  </header>
-
-  <header v-if="account" class="flex flex-col mx-3">
-    <div class="flex">
-      <button class="secondary inset grow">
-        <IconSearch />
-        <span class="text-gray-300 ml-2">Search</span>
-      </button>
+  <header class="flex mx-3">
+    <button class="secondary inset grow">
+      <IconSearch />
+      <span class="text-gray-300 ml-2 font-normal">Search</span>
+    </button>
+    <template v-if="!account">
+      <button @click="connect" class="ml-2">Connect wallet</button>
+    </template>
+    <template v-if="account">
       <button @click="disconnect" class="secondary inset flex space-x-1 font-normal">
         <div
           class="rounded-full w-5 h-5 bg-center bg-cover"
@@ -50,6 +49,6 @@ navigator.storage.estimate().then((estimate) => {
       <button class="ml-2" @click="$emit('create-proposal')">
         <IconFeather />
       </button>
-    </div>
+    </template>
   </header>
 </template>

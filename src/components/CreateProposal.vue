@@ -5,12 +5,12 @@ defineEmits<{
   (e: "openCreateProposalModal"): void;
 }>();
 
-const { newProposalTitle } = useNewProposal();
+const { newProposalForm } = useNewProposal();
 </script>
 
 <template>
   <div class="p-3">
-    <input v-model="newProposalTitle" class="rounded-b-none text-lg" />
+    <input v-model="newProposalForm.title" class="rounded-b-none text-lg" />
     <button
       @click="$emit('openCreateProposalModal')"
       class="w-full rounded-t-none"

@@ -11,15 +11,7 @@ defineEmits<{
   (e: "close"): void;
 }>();
 
-const { newProposalTitle, addProposal } = useNewProposal();
-
-const proposalForm = ref<{
-  to: string;
-  title: string;
-}>({
-  to: "mktcode.eth",
-  title: newProposalTitle.value,
-});
+const { newProposalForm, addProposal } = useNewProposal();
 
 enum PROPOSAL_FORM_STEPS {
   COMMON,
@@ -36,27 +28,11 @@ const proposalFormStep = ref<PROPOSAL_FORM_STEPS>(PROPOSAL_FORM_STEPS.COMMON);
     <template #content>
       <div v-if="proposalFormStep === PROPOSAL_FORM_STEPS.COMMON">
         <div class="mt-2 space-y-3">
-          <div class="relative">
-            <div class="flex items-center space-x-1 absolute left-3 top-[10px]">
-              <div class="text-gray-400">To:</div>
-              <div
-                class="rounded-full w-5 h-5 bg-center bg-cover"
-                style="
-                  background-image: url('https://ui-avatars.com/api/?background=0D8ABC&color=fff');
-                "
-              />
-            </div>
-            <input
-              type="text"
-              v-model="proposalForm.to"
-              class="secondary pl-16"
-            />
-          </div>
-          <input class="secondary" type="text" v-model="newProposalTitle" />
-          <textarea class="secondary" placeholder="Proposal description..." />
+          <input class="secondary" type="text" v-model="newProposalForm.title" />
+          <textarea class="secondary" placeholder="Description..." v-model="newProposalForm.description" />
           <div class="flex space-x-2">
-            <input class="secondary" type="date" v-model="proposalForm.title" />
-            <input class="secondary" type="date" v-model="proposalForm.title" />
+            <input class="secondary" type="date" v-model="newProposalForm.start" />
+            <input class="secondary" type="date" v-model="newProposalForm.end" />
           </div>
         </div>
 

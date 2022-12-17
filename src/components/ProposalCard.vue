@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import IconDots from "@/components/icons/IconDots.vue";
-import IconEye from "./icons/IconEye.vue";
 import IconHandshake from "@/components/icons/IconHandshake.vue";
 import IconInfoCircle from "@/components/icons/IconInfoCircle.vue";
 import IconLock from "@/components/icons/IconLock.vue";
@@ -28,26 +27,17 @@ defineEmits<{
       <div class="flex">
         <div class="flex items-center space-x-2 leading-4">
           <div
-            class="rounded-full w-8 h-8 bg-center bg-cover"
+            class="rounded-full w-6 h-6 bg-center bg-cover"
             style="
               background-image: url('https://ui-avatars.com/api/?background=0D8ABC&color=fff');
             "
           />
-          <div>
-            <div class="flex space-x-2">
-              <div class="text-gray-500">mktcode.eth</div>
-              <div class="text-gray-400">1d ago</div>
-            </div>
-            <div class="flex space-x-2 text-sm">
-              <div class="text-gray-500">to:</div>
-              <div class="text-gray-400">fabien.eth</div>
-            </div>
+          <div class="flex space-x-2">
+            <div class="text-gray-500">mktcode.eth</div>
+            <div class="text-gray-400">1d ago</div>
           </div>
         </div>
-        <div class="flex ml-auto mr-3 text-gray-300">
-          <IconEye class="mr-1" /> 27
-        </div>
-        <IconDots class="text-gray-300" />
+        <IconDots class="ml-auto text-gray-300" />
       </div>
       <h2 class="text-xl leading-6 font-medium text-gray-900 mt-3">
         {{ proposal.title }}

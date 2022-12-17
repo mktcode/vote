@@ -7,7 +7,6 @@ import IconSearch from "@/components/icons/IconSearch.vue";
 import IconConnection from "./icons/IconConnection.vue";
 import IconWallet from "./icons/IconWallet.vue";
 import IconStorage from "./icons/IconStorage.vue";
-import { peer } from "@/peer";
 
 const { account, accountShort, ensName, connect, disconnect } = useWeb3();
 
@@ -20,13 +19,6 @@ navigator.storage.estimate().then((estimate) => {
     usedBrowserStorage.value = estimate.usage;
   }
 });
-
-const peerCount = ref(0);
-setInterval(() => {
-  peer.listAllPeers((peers: any) => {
-    peerCount.value = peers.length;
-  });
-}, 2000);
 </script>
 
 <template>
@@ -54,7 +46,7 @@ setInterval(() => {
         {{ prettyBytes(usedBrowserStorage) }}
       </button>
       <button class="secondary inset flex space-x-1 font-normal">
-        <IconConnection class="mr-2" /> {{ peerCount }}
+        <IconConnection class="mr-2" /> 5
       </button>
       <button class="secondary inset">
         <IconCog />

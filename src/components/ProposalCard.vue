@@ -6,10 +6,9 @@ import IconInfoCircle from "@/components/icons/IconInfoCircle.vue";
 import IconLock from "@/components/icons/IconLock.vue";
 import IconWallet from "@/components/icons/IconWallet.vue";
 import IconWarning from "@/components/icons/IconWarning.vue";
-import type { Proposal } from "@/db";
 
 defineProps<{
-  proposal: Proposal;
+  proposal: any;
   mode:
     | "proposal-running"
     | "proposal-ended"

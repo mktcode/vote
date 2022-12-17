@@ -1,7 +1,6 @@
 import { ref } from "vue";
-import { db, type Proposal } from "../db";
-import { peer } from "../peer";
 import { useWeb3 } from "./useWeb3";
+import { gun } from "./useDatabase";
 
 const { account, signer } = useWeb3();
 
@@ -19,35 +18,21 @@ async function hashMessage(message: any) {
 }
 
 async function addProposal() {
-  const proposal: Proposal = {
+  const proposal = {
     to: "0x1234567890",
     from: account.value,
     title: newProposalTitle.value,
-    choices: ["Option A", "Option B", "Option C"],
     authorTimestamp: Date.now(),
   };
 
-  proposal.hash = await hashMessage(proposal);
+  const hash = await hashMessage(proposal);
+  const signature = await signer.value?.signMessage(hash);
 
-  await db.proposals.add(proposal);
-
-  const signature = await signer.value?.signMessage(proposal.hash);
-
-  peer.listAllPeers((peers: any) => {
-    peers.forEach((peerId: any) => {
-      if (peerId === peer.id) return;
-
-      const connection = peer.connect(peerId);
-      connection.on("open", () => {
-        connection.send({
-          type: "proposal",
-          payload: proposal,
-          from: account.value,
-          signature,
-        });
-      });
-    });
-  });
+  const signedProposal = gun.get(hash).set({
+    ...proposal,
+    signature,
+  })
+  gun.get(`proposals`).set(signedProposal)
 }
 
 export function useNewProposal() {

@@ -1,21 +1,17 @@
 <script setup lang="ts">
 import { ref } from "vue";
-import { from, useObservable } from "@vueuse/rxjs";
-import { liveQuery } from "dexie";
 import { TransitionRoot } from "@headlessui/vue";
-import { db, type Proposal } from "../db";
+import { gun } from "@/composables/useDatabase";
 import ProposalCard from "@/components/ProposalCard.vue";
 import FinalizeModal from "@/components/FinalizeModal.vue";
 
-const proposals = useObservable<Proposal[]>(
-  from(liveQuery(() => db.proposals.toArray()))
-);
+const proposals = ref<any>([]);
+gun.get('proposals').map().once((proposal) => {
+  proposals.value.push(proposal);
+})
 
 const isFinalizeModalOpen = ref(false);
-const newProposalsCount = ref(0);
-setInterval(() => {
-  newProposalsCount.value++;
-}, 10000);
+const newProposalsCount = ref(1);
 </script>
 
 <template>
@@ -46,8 +42,8 @@ setInterval(() => {
       class="rounded-t-xl overflow-hidden mx-3 divide-y-4 divide-gray-100 shadow-lg mt-3"
     >
       <ProposalCard
-        v-for="proposal in proposals"
-        :key="proposal.hash"
+        v-for="(proposal, hash) in proposals"
+        :key="hash"
         :proposal="proposal"
         :mode="'proposal-running'"
         @open-finalize-modal="isFinalizeModalOpen = true"

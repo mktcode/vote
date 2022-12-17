@@ -1,12 +1,14 @@
 <script setup lang="ts">
 import { ref } from "vue";
-import prettyBytes from "pretty-bytes";
 import { useWeb3 } from "@/composables/useWeb3";
 import IconCog from "@/components/icons/IconCog.vue";
 import IconSearch from "@/components/icons/IconSearch.vue";
-import IconConnection from "./icons/IconConnection.vue";
 import IconWallet from "./icons/IconWallet.vue";
-import IconStorage from "./icons/IconStorage.vue";
+import IconFeather from "./icons/IconFeather.vue";
+
+defineEmits<{
+  (e: "create-proposal"): void;
+}>();
 
 const { account, accountShort, ensName, connect, disconnect } = useWeb3();
 
@@ -28,7 +30,11 @@ navigator.storage.estimate().then((estimate) => {
 
   <header v-if="account" class="flex flex-col mx-3">
     <div class="flex">
-      <button @click="disconnect" class="secondary inset flex space-x-1 grow">
+      <button class="secondary inset grow">
+        <IconSearch />
+        <span class="text-gray-300 ml-2">Search</span>
+      </button>
+      <button @click="disconnect" class="secondary inset flex space-x-1 font-normal">
         <div
           class="rounded-full w-5 h-5 bg-center bg-cover"
           :style="`background-image: url('https://ui-avatars.com/api/?background=0D8ABC&color=fff');`"
@@ -41,20 +47,9 @@ navigator.storage.estimate().then((estimate) => {
         <IconWallet />
         <div>2.68 ETH</div>
       </button>
-      <button class="secondary inset flex space-x-1 font-normal">
-        <IconStorage class="mr-2" />
-        {{ prettyBytes(usedBrowserStorage) }}
-      </button>
-      <button class="secondary inset flex space-x-1 font-normal">
-        <IconConnection class="mr-2" /> 5
-      </button>
-      <button class="secondary inset">
-        <IconCog />
+      <button class="ml-2" @click="$emit('create-proposal')">
+        <IconFeather />
       </button>
     </div>
-    <button class="w-full secondary inset group h-12 mt-3">
-      <IconSearch class="mr-2 opacity-30" />
-      <div class="opacity-30 font-normal">Search profiles and proposals...</div>
-    </button>
   </header>
 </template>

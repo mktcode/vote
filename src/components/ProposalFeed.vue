@@ -30,7 +30,7 @@ const newProposalsCount = ref(1);
       leave-from="opacity-100 scale-100 "
       leave-to="opacity-0 scale-95 "
     >
-      <div class="px-3">
+      <div class="px-3 mt-3">
         <button
           @click="newProposalsCount = 0"
           class="w-full inset justify-center text-sm !text-gray-400 font-normal secondary"

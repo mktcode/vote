@@ -1,12 +1,15 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import { TransitionRoot } from "@headlessui/vue";
-import { gun } from "@/composables/useDatabase";
+import { useGun } from '@gun-vue/composables'
 import ProposalCard from "@/components/ProposalCard.vue";
 import FinalizeModal from "@/components/FinalizeModal.vue";
+import type { Proposal } from "@/composables/useNewProposal";
 
-const proposals = ref<any>([]);
-gun.get('proposals').map().once((proposal) => {
+const gun = useGun({ peers: [ 'http://192.168.178.29:4200/gun'] });
+
+const proposals = ref<Proposal[]>([]);
+gun.get('proposals').map().once((proposal: Proposal) => {
   proposals.value.push(proposal);
 })
 

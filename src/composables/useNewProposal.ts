@@ -1,10 +1,25 @@
 import { ref } from "vue";
 import { useWeb3 } from "./useWeb3";
-import { gun } from "./useDatabase";
+import { useGun } from '@gun-vue/composables'
+
+const gun = useGun({ peers: [ 'http://192.168.178.29:4200/gun'] });
+export interface Proposal {
+  from: string;
+  title: string;
+  description: string;
+  authorTimestamp: number;
+  start: string;
+  end: string;
+};
 
 const { account, signer } = useWeb3();
 
-const newProposalTitle = ref("Hello world!");
+const newProposalForm = ref({
+  title: "Hello world!",
+  description: "",
+  start: "2023-01-01",
+  end: "2023-02-01",
+});
 
 async function hashMessage(message: any) {
   const msgUint8 = new TextEncoder().encode(JSON.stringify(message));
@@ -18,11 +33,13 @@ async function hashMessage(message: any) {
 }
 
 async function addProposal() {
-  const proposal = {
-    to: "0x1234567890",
+  const proposal: Proposal = {
     from: account.value,
-    title: newProposalTitle.value,
+    title: newProposalForm.value.title,
+    description: newProposalForm.value.description,
     authorTimestamp: Date.now(),
+    start: newProposalForm.value.start,
+    end: newProposalForm.value.end,
   };
 
   const hash = await hashMessage(proposal);
@@ -37,7 +54,7 @@ async function addProposal() {
 
 export function useNewProposal() {
   return {
-    newProposalTitle,
+    newProposalForm,
     addProposal,
   };
 }

@@ -11,6 +11,7 @@
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore"
   },
   "dependencies": {
+    "@gun-vue/composables": "^0.12.0",
     "@headlessui/vue": "^1.7.4",
     "@vueuse/rxjs": "^9.6.0",
     "dexie": "^3.2.2",

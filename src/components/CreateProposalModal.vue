@@ -28,11 +28,27 @@ const proposalFormStep = ref<PROPOSAL_FORM_STEPS>(PROPOSAL_FORM_STEPS.COMMON);
     <template #content>
       <div v-if="proposalFormStep === PROPOSAL_FORM_STEPS.COMMON">
         <div class="mt-2 space-y-3">
-          <input class="secondary" type="text" v-model="newProposalForm.title" />
-          <textarea class="secondary" placeholder="Description..." v-model="newProposalForm.description" />
+          <input
+            class="secondary"
+            type="text"
+            v-model="newProposalForm.title"
+          />
+          <textarea
+            class="secondary"
+            placeholder="Description..."
+            v-model="newProposalForm.description"
+          />
           <div class="flex space-x-2">
-            <input class="secondary" type="date" v-model="newProposalForm.start" />
-            <input class="secondary" type="date" v-model="newProposalForm.end" />
+            <input
+              class="secondary"
+              type="date"
+              v-model="newProposalForm.start"
+            />
+            <input
+              class="secondary"
+              type="date"
+              v-model="newProposalForm.end"
+            />
           </div>
         </div>
 

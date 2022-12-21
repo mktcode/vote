@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import { useWeb3 } from "@/composables/useWeb3";
-import IconCog from "@/components/icons/IconCog.vue";
 import IconSearch from "@/components/icons/IconSearch.vue";
 import IconWallet from "./icons/IconWallet.vue";
 import IconFeather from "./icons/IconFeather.vue";
@@ -33,7 +32,10 @@ navigator.storage.estimate().then((estimate) => {
       <button @click="connect" class="ml-2">Connect wallet</button>
     </template>
     <template v-if="account">
-      <button @click="disconnect" class="secondary inset flex space-x-1 font-normal">
+      <button
+        @click="disconnect"
+        class="secondary inset flex space-x-1 font-normal"
+      >
         <div
           class="rounded-full w-5 h-5 bg-center bg-cover"
           :style="`background-image: url('https://ui-avatars.com/api/?background=0D8ABC&color=fff');`"

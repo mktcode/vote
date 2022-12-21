@@ -6,4 +6,4 @@ interface Window {
 
 declare module "@gun-vue/composables" {
   export function useGun(options?: any): IGun;
-};
+}

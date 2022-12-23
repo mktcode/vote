@@ -55,9 +55,10 @@ export interface Proposal {
   id: string;
   author: string;
   voting: ProposalVoting;
-  transactionSets: {
+  transactionSets?: {
     [hash: string]: ProposalTransactionSet;
   };
   metadata: ProposalMetadata;
   signature: string;
+  timestamp: number;
 }

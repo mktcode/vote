@@ -1,17 +1,18 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import { TransitionRoot } from "@headlessui/vue";
-import { useGun } from '@gun-vue/composables'
+import { useDatabase } from "@/composables/useDatabase";
 import ProposalCard from "@/components/ProposalCard.vue";
 import FinalizeModal from "@/components/FinalizeModal.vue";
-import type { Proposal } from "@/composables/useNewProposal";
 
-const gun = useGun({ peers: [ 'http://192.168.178.29:4200/gun'] });
+const { db } = useDatabase();
 
-const proposals = ref<Proposal[]>([]);
-gun.get('proposals').map().once((proposal: Proposal) => {
-  proposals.value.push(proposal);
-})
+const proposalIds = ref<string[]>([]);
+db.get("proposals")
+  .map()
+  .once((_proposal: any, id: string) => {
+    proposalIds.value.push(id);
+  });
 
 const isFinalizeModalOpen = ref(false);
 const newProposalsCount = ref(1);
@@ -41,13 +42,13 @@ const newProposalsCount = ref(1);
     </TransitionRoot>
 
     <main
-      v-if="proposals && proposals.length > 0"
+      v-if="proposalIds.length > 0"
       class="rounded-t-xl overflow-hidden mx-3 divide-y-4 divide-gray-100 shadow-lg mt-3"
     >
       <ProposalCard
-        v-for="(proposal, hash) in proposals"
-        :key="hash"
-        :proposal="proposal"
+        v-for="id in proposalIds"
+        :key="id"
+        :proposal-id="id"
         :mode="'proposal-running'"
         @open-finalize-modal="isFinalizeModalOpen = true"
       />

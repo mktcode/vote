@@ -1,13 +1,18 @@
 <script setup lang="ts">
+import { ref } from "vue";
+import { useDatabase } from "@/composables/useDatabase";
 import IconDots from "@/components/icons/IconDots.vue";
 import IconHandshake from "@/components/icons/IconHandshake.vue";
 import IconInfoCircle from "@/components/icons/IconInfoCircle.vue";
 import IconLock from "@/components/icons/IconLock.vue";
 import IconWallet from "@/components/icons/IconWallet.vue";
 import IconWarning from "@/components/icons/IconWarning.vue";
+import type { Proposal } from "@/types/proposal";
 
-defineProps<{
-  proposal: any;
+const { db } = useDatabase();
+
+const props = defineProps<{
+  proposalId: string;
   mode:
     | "proposal-running"
     | "proposal-ended"
@@ -19,45 +24,50 @@ defineProps<{
 defineEmits<{
   (e: "openFinalizeModal"): void;
 }>();
+
+const proposal = ref<Proposal>();
+db.get("proposals").get(props.proposalId).load((storedProposal: any) => {
+  proposal.value = storedProposal;
+});
 </script>
 
 <template>
-  <div class="bg-white">
+  <div v-if="proposal" class="bg-white">
     <div>
       <div class="flex">
         <div class="flex items-center space-x-2 leading-4 p-3 pb-0">
           <div
             class="rounded-full w-6 h-6 bg-center bg-cover"
-            style="
-              background-image: url('https://ui-avatars.com/api/?background=0D8ABC&color=fff');
-            "
+            :style="`background-image: url('https://ui-avatars.com/api/?background=0D8ABC&color=fff');`"
           />
           <div class="flex space-x-2">
             <div class="text-gray-500">mktcode.eth</div>
             <div class="text-gray-400">1d ago</div>
           </div>
         </div>
-        <button class="ml-auto inset secondary opacity-30 rounded-tl-none rounded-br-none">
+        <button
+          class="ml-auto inset secondary opacity-30 rounded-tl-none rounded-br-none"
+        >
           <IconDots />
         </button>
       </div>
       <h2 class="text-xl leading-6 font-medium text-gray-900 p-3">
-        {{ proposal.title }}
+        {{ proposal.metadata.title }}
       </h2>
     </div>
     <div class="bg-gray-50">
       <div
-        v-for="(option, i) in ['Yes', 'No', 'Abstain']"
-        :key="i"
+        v-for="(option, key, index) in proposal.voting.options"
+        :key="key"
         class="relative overflow-hidden"
       >
         <div
           class="bg-sky-600 absolute h-full rounded-r-xl"
-          :style="`width: ${75 - i * 25}%; opacity: ${(100 - i * 15) / 100};`"
+          :style="`width: ${75 - index * 25}%; opacity: ${(100 - index * 15) / 100};`"
         ></div>
         <div class="flex justify-between px-3 py-1 relative">
-          <strong class="text-sky-50">{{ option }}</strong>
-          <div class="text-gray-400 text-sm">{{ 50 - i * 15 }}%</div>
+          <strong class="text-sky-50">{{ option.label }}</strong>
+          <div class="text-gray-400 text-sm">{{ 50 - index * 15 }}%</div>
         </div>
       </div>
     </div>

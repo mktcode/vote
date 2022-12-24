@@ -1,15 +1,19 @@
 <script setup lang="ts">
 import { ref } from "vue";
-import { useWeb3 } from "@/composables/useWeb3";
+import { useDatabase } from "@/composables/useDatabase";
 import IconSearch from "@/components/icons/IconSearch.vue";
 import IconWallet from "./icons/IconWallet.vue";
 import IconFeather from "./icons/IconFeather.vue";
 
 defineEmits<{
   (e: "create-proposal"): void;
+  (e: "login"): void;
+  (e: "logout"): void;
+  (e: "create-account"): void;
+  (e: "open-user-modal"): void;
 }>();
 
-const { account, accountShort, ensName, connect, disconnect } = useWeb3();
+const { user } = useDatabase();
 
 const freeBrowserStorage = ref(0);
 const usedBrowserStorage = ref(0);
@@ -28,12 +32,15 @@ navigator.storage.estimate().then((estimate) => {
       <IconSearch />
       <span class="text-gray-300 ml-2 font-normal">Search</span>
     </button>
-    <template v-if="!account">
-      <button @click="connect" class="ml-2">Connect wallet</button>
+    <template v-if="!user">
+      <button @click="$emit('create-account')" class="ml-2">
+        create account
+      </button>
+      <button @click="$emit('login')" class="ml-2">login</button>
     </template>
-    <template v-if="account">
+    <template v-if="user">
       <button
-        @click="disconnect"
+        @click="$emit('open-user-modal')"
         class="secondary inset flex space-x-1 font-normal"
       >
         <div
@@ -41,10 +48,13 @@ navigator.storage.estimate().then((estimate) => {
           :style="`background-image: url('https://ui-avatars.com/api/?background=0D8ABC&color=fff');`"
         />
         <div>
-          {{ ensName || accountShort }}
+          {{ user.alias }}
         </div>
       </button>
-      <button class="secondary inset flex space-x-1 font-normal">
+      <button
+        class="secondary inset flex space-x-1 font-normal"
+        @click="$emit('open-user-modal')"
+      >
         <IconWallet />
         <div>2.68 ETH</div>
       </button>

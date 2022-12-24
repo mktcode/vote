@@ -1,13 +1,23 @@
-import { useGun } from "@gun-vue/composables";
+import Gun from "gun/gun";
 import "gun/sea";
 import "gun/lib/open";
 import "gun/lib/load";
+import { ref } from "vue";
 
-const gun = useGun({ peers: [import.meta.env.VITE_GUN_PEER] });
+const gun = Gun({ peers: [import.meta.env.VITE_GUN_PEER] });
+
 const db = gun
   .get(import.meta.env.VITE_GUN_DB_NAME)
   .get(import.meta.env.VITE_DAO_ADDRESS);
 
+const user = ref<any>(null);
+const userManager = gun.user();
+
+function logout() {
+  userManager.leave();
+  user.value = null;
+}
+
 export function useDatabase() {
-  return { gun, db };
+  return { gun, db, userManager, user, logout };
 }

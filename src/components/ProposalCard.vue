@@ -26,9 +26,11 @@ defineEmits<{
 }>();
 
 const proposal = ref<Proposal>();
-db.get("proposals").get(props.proposalId).load((storedProposal: any) => {
-  proposal.value = storedProposal;
-});
+db.get("proposals")
+  .get(props.proposalId)
+  .load((storedProposal: any) => {
+    proposal.value = storedProposal;
+  });
 </script>
 
 <template>
@@ -63,7 +65,9 @@ db.get("proposals").get(props.proposalId).load((storedProposal: any) => {
       >
         <div
           class="bg-sky-600 absolute h-full rounded-r-xl"
-          :style="`width: ${75 - index * 25}%; opacity: ${(100 - index * 15) / 100};`"
+          :style="`width: ${75 - index * 25}%; opacity: ${
+            (100 - index * 15) / 100
+          };`"
         ></div>
         <div class="flex justify-between px-3 py-1 relative">
           <strong class="text-sky-50">{{ option.label }}</strong>

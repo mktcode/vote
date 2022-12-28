@@ -4,11 +4,11 @@ import "gun/lib/open";
 import "gun/lib/load";
 import { ref } from "vue";
 
-const gun = Gun({ peers: [import.meta.env.VITE_GUN_PEER] });
+const relays = localStorage["phorum/relays"] || [import.meta.env.VITE_GUN_DEFAULT_RELAY];
 
-const db = gun
-  .get(import.meta.env.VITE_GUN_DB_NAME as string)
-  .get(import.meta.env.VITE_DAO_ADDRESS as string);
+const gun = Gun({ peers: relays });
+
+const db = gun.get(import.meta.env.VITE_GUN_DB_NAME as string);
 
 const user = ref<any>(null);
 const userManager = gun.user();

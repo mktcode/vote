@@ -82,9 +82,14 @@ async function addProposal() {
   db.get("proposals").get(id).put(proposal);
 }
 
+async function addOption(proposalId: string, option: any) {
+  // TODO: Check voting power
+}
+
 export function useNewProposal() {
   return {
     newProposalForm,
     addProposal,
+    addOption,
   };
 }

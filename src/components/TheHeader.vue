@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from "vue";
-import { useDatabase } from "@/composables/useDatabase";
+import { user } from "@/database";
 import IconSearch from "@/components/icons/IconSearch.vue";
 import IconWallet from "./icons/IconWallet.vue";
 import IconFeather from "./icons/IconFeather.vue";
@@ -12,8 +12,6 @@ defineEmits<{
   (e: "create-account"): void;
   (e: "open-user-modal"): void;
 }>();
-
-const { user } = useDatabase();
 
 const freeBrowserStorage = ref(0);
 const usedBrowserStorage = ref(0);

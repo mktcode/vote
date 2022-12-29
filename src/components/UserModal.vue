@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useDatabase } from "@/composables/useDatabase";
+import { user, logout } from "@/database";
 import ModalBase from "@/components/ModalBase.vue";
 
 defineProps<{
@@ -9,8 +9,6 @@ defineProps<{
 defineEmits<{
   (e: "close"): void;
 }>();
-
-const { user, logout } = useDatabase();
 </script>
 
 <template>

@@ -18,6 +18,4 @@ function logout() {
   user.value = null;
 }
 
-export function useDatabase() {
-  return { gun, db, userManager, user, logout };
-}
+export { gun, db, userManager, user, logout };

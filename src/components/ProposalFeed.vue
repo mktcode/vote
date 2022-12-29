@@ -1,11 +1,8 @@
 <script setup lang="ts">
 import { ref } from "vue";
-import { TransitionRoot } from "@headlessui/vue";
-import { useDatabase } from "@/composables/useDatabase";
+import { db } from "@/database";
 import ProposalCard from "@/components/ProposalCard.vue";
 import FinalizeModal from "@/components/FinalizeModal.vue";
-
-const { db } = useDatabase();
 
 const proposalIds = ref<string[]>([]);
 db.get("proposals")

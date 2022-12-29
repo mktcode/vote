@@ -1,11 +1,10 @@
 import { ref } from "vue";
 import { MerkleTree } from "merkletreejs";
 import sha256 from "crypto-js/sha256";
+import { db } from "@/database";
 import type { Proposal, ProposalVoting } from "@/types/proposal";
 import { useWeb3 } from "@/composables/useWeb3";
-import { useDatabase } from "@/composables/useDatabase";
 
-const { db } = useDatabase();
 const { account, signer } = useWeb3();
 
 const newProposalForm = ref({

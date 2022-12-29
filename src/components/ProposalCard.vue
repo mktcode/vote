@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from "vue";
-import { useDatabase } from "@/composables/useDatabase";
+import { db } from "@/database";
 import IconDots from "@/components/icons/IconDots.vue";
 import IconHandshake from "@/components/icons/IconHandshake.vue";
 import IconInfoCircle from "@/components/icons/IconInfoCircle.vue";
@@ -8,8 +8,6 @@ import IconLock from "@/components/icons/IconLock.vue";
 import IconWallet from "@/components/icons/IconWallet.vue";
 import IconWarning from "@/components/icons/IconWarning.vue";
 import type { Proposal } from "@/types/proposal";
-
-const { db } = useDatabase();
 
 const props = defineProps<{
   proposalId: string;

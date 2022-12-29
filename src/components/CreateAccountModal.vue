@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from "vue";
-import { useDatabase } from "@/composables/useDatabase";
+import { userManager, user } from "@/database";
 import ModalBase from "@/components/ModalBase.vue";
 
 defineProps<{
@@ -10,8 +10,6 @@ defineProps<{
 const emit = defineEmits<{
   (e: "close"): void;
 }>();
-
-const { userManager, user } = useDatabase();
 
 const alias = ref("");
 const password = ref("");
